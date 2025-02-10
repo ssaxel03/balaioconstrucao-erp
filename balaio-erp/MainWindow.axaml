@@ -1,0 +1,70 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="balaio_erp.MainWindow"
+        Title="avalonia_test"
+        MinHeight="600"
+        MinWidth="800">
+    
+    <Window.Styles>
+        <Style Selector="Label">
+            <Setter Property="Foreground" Value="#181818"></Setter>
+            <Setter Property="FontSize" Value="12"></Setter>
+        </Style>
+        <Style Selector="CheckBox:unchecked /template/ Border#NormalRectangle">
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="BorderBrush" Value="#181818"/>
+            <Setter Property="Background" Value="#F6F6F6"></Setter>
+        </Style>
+        <Style Selector="CheckBox:checked /template/ Border#NormalRectangle">
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="BorderBrush" Value="#181818"/>
+            <Setter Property="Background" Value="#009900"></Setter>
+        </Style>
+        <Style Selector="CheckBox /template/ ContentPresenter">
+            <Setter Property="Foreground" Value="#181818"></Setter>
+        </Style>
+        <Style Selector="CheckBox:pointerover /template/ ContentPresenter">
+            <Setter Property="Foreground" Value="#181818"></Setter>
+        </Style>
+    </Window.Styles>
+    <Grid  RowDefinitions="Auto, Auto, *" Background="#F6F6F6">
+        <Grid Grid.Row="0" Background="#181818" Height="100">
+            <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Foreground="#F6F6F6">Simple Quotes</Label>
+        </Grid>
+        
+        <Grid Grid.Row="1" RowDefinitions="Auto, *, *" ColumnDefinitions="*, *, *, *" Margin="10, 10">
+            
+            <Label Grid.Row="0" Grid.Column="0" Margin="0, 0, 5, 0" FontWeight="Bold">Cliente</Label>
+            
+            <Grid RowDefinitions="Auto, Auto" Grid.Row="1" Grid.Column="0" Margin="0, 0, 5, 0">
+                <Label Foreground="#181818" Grid.Row="0">Nome</Label>
+                <TextBox Grid.Row="1"></TextBox>
+            </Grid>
+            
+            <Grid RowDefinitions="Auto, Auto" Grid.Row="2" Grid.Column="0" Margin="0, 0, 5, 0">
+                <Label Foreground="#181818" Grid.Row="0">Morada</Label>
+                <TextBox Grid.Row="1"></TextBox>
+            </Grid>
+            
+            <Label Grid.Row="0" Grid.Column="1" Margin="5, 0, 0, 0" FontWeight="Bold">Documento</Label>
+            
+            <Grid RowDefinitions="Auto, Auto" Grid.Row="1" Grid.Column="1" Margin="5, 0, 0, 0">
+                <Label Foreground="#181818" Grid.Row="0">Assunto</Label>
+                <TextBox Grid.Row="1"></TextBox>
+            </Grid>
+            
+            <StackPanel VerticalAlignment="Bottom" Spacing="5" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Margin="5, 0, 0, 0" Orientation="Horizontal">
+                <CheckBox>Opções</CheckBox>
+                <CheckBox>Autos</CheckBox>
+                <CheckBox>Condomínio</CheckBox>
+                <CheckBox>IVA</CheckBox>
+            </StackPanel>
+            
+        </Grid>
+        
+        
+    </Grid>
+</Window>
