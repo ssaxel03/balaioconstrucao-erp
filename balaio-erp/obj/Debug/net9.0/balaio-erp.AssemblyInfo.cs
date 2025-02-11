@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("balaio-erp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a57a1f5685bd2d8e9029cba028f9ff92e3f21614")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+583d3d84b9b016ddd26b373e9e9f47b28468f352")]
 [assembly: System.Reflection.AssemblyProductAttribute("balaio-erp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("balaio-erp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
