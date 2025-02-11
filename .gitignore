@@ -1,0 +1,58 @@
+# Ignore build output
+bin/
+obj/
+
+# Ignore user-specific Visual Studio/JetBrains Rider settings
+.vs/
+.idea/
+*.user
+*.suo
+*.sln.docstates
+
+# Ignore Avalonia preview cache
+.avalonia/
+
+# Ignore NuGet packages
+*.nupkg
+packages/
+.nuget/
+
+# Ignore Rider & Resharper files
+*DotSettings
+*.DotSettings.user
+
+# Ignore generated files
+GeneratedFiles/
+*.g.i.cs
+*.g.cs
+
+# Ignore logs & temp files
+logs/
+*.log
+*.tmp
+
+# Ignore compiled DLLs & EXEs
+*.exe
+*.dll
+*.pdb
+
+# Ignore dependency cache
+node_modules/
+dist/
+
+# Ignore .NET user secrets
+secrets.json
+
+# Ignore environmental config files
+appsettings.*.json
+.env
+
+# Ignore coverage reports
+coverage/
+*.coverage
+*.coverlet
+
+# Ignore MacOS & Linux system files
+.DS_Store
+*.swp
+
