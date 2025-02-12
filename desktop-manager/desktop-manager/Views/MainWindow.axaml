@@ -7,14 +7,82 @@
         x:Class="desktop_manager.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="desktop_manager">
+        Title="desktop_manager"
+        Background="#F6F6F6">
 
     <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    
+        <Grid RowDefinitions="Auto, Auto, Auto" ColumnDefinitions="*">
+            
+            <Grid Grid.Row="0" Height="100" Background="#B00">
+                <TextPresenter VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5, 20" Foreground="#F6F6F6" FontSize="28" Grid.Row="0" Grid.Column="0">Balaio - Contrução Civil</TextPresenter>
+            </Grid>
+            
+            <DataGrid Grid.Row="1" Margin="5, 5" ItemsSource="{Binding Items}" AutoGenerateColumns="False" CanUserSortColumns="False" GridLinesVisibility="All" HorizontalGridLinesBrush="#181818" VerticalGridLinesBrush="#181818" CellEditEnded="SortItems">
+                <DataGrid.Styles>
+                    <!-- Style for the DataGrid -->
+                    <Style Selector="DataGrid">
+                        <Setter Property="Background" Value="#E6E6E6"/>
+                        <Setter Property="Foreground" Value="#181818"/>
+                        <Setter Property="FontSize" Value="14"></Setter>
+                        <Setter Property="BorderBrush" Value="#181818"></Setter>
+                        <Setter Property="BorderThickness" Value="1, 1, 1, 0"></Setter>
+                        <Setter Property="GridLinesVisibility" Value="All"></Setter>
+                    </Style>
 
+                    <!-- Style for the DataGrid Headers -->
+                    <Style Selector="DataGridColumnHeader">
+                        <Setter Property="Background" Value="#C6C6C6"/>
+                        <Setter Property="Foreground" Value="#181818"/>
+                        <Setter Property="FontSize" Value="14"></Setter>
+                        <Setter Property="SeparatorBrush" Value="#181818"></Setter>
+                        <Setter Property="BorderBrush" Value="#181818"></Setter>
+                        <Setter Property="BorderThickness" Value="0, 0, 0, 1"></Setter>
+                    </Style>
+
+                    <!-- Style for the hovered row -->
+                    <Style Selector="DataGridRow:pointerover">
+                        <Setter Property="Background" Value="#D6D6D6"/>
+                        <Setter Property="Foreground" Value="#181818"/>
+                        <Setter Property="FontSize" Value="14"></Setter>
+                    </Style>
+
+                    <!-- Style for the DataGridRow -->
+                    <Style Selector="DataGridRow">
+                        <Setter Property="Background" Value="#E6E6E6"/>
+                        <Setter Property="Foreground" Value="#181818"/>
+                        <Setter Property="FontSize" Value="14"></Setter>
+                    </Style>
+                </DataGrid.Styles>
+                
+                <DataGrid.Columns>
+                
+                    <!-- ID Column -->
+                    <DataGridTextColumn Header="#" Binding="{Binding Id}" />
+
+                    <!-- Description Column -->
+                    <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*" />
+
+                    <!-- Quantity Column -->
+                    <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" />
+
+                    <!-- Unit Price Column -->
+                    <DataGridTextColumn Header="Unit Price" Binding="{Binding UnitPrice}" />
+
+                    <!-- Profit Column (Read-Only) -->
+                    <DataGridTextColumn Header="Profit" Binding="{Binding Profit, StringFormat=F2}" IsReadOnly="True" />
+                    
+                    <!-- Partnership Column (Read-Only) -->
+                    <DataGridTextColumn Header="Partnership" Binding="{Binding Partnership, StringFormat=F2}" IsReadOnly="True" />
+                    
+                    <!-- Total Column (Read-Only) -->
+                    <DataGridTextColumn Header="Total" Binding="{Binding Total, StringFormat=F2}" IsReadOnly="True" />
+                
+                </DataGrid.Columns>
+                
+            </DataGrid>
+        </Grid>
 </Window>
