@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -28,7 +30,8 @@ namespace desktop_manager.ViewModels
         public void SortItems()
         {
             Console.WriteLine("sorting items");
-            var sortedItems = Items.OrderBy(item => item.Id).ToList();
+            List<Item> sortedItems = Items.ToList();
+            sortedItems.Sort();
             Items.Clear();
             foreach (var item in sortedItems)
             {
