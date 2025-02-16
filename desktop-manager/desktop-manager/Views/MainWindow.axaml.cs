@@ -28,5 +28,10 @@ namespace desktop_manager.Views
         {
             (this.DataContext as MainWindowViewModel)?.SortItems();
         }
+
+        private void GenerateQuotePdf()
+        {
+            (this.DataContext as MainWindowViewModel)?.GenerateQuotePdf();
+        }
     }
 }

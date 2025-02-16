@@ -5,10 +5,10 @@ using Avalonia.Animation;
 namespace desktop_manager.Models;
 
 using CommunityToolkit.Mvvm.ComponentModel;
-    public partial class Item : ObservableObject, IComparable
+    public partial class Item : ObservableObject, IComparable<Item>
     {
         [ObservableProperty]
-        private string _id;
+        private decimal _id;
         
         [ObservableProperty]
         private string _description;
@@ -25,7 +25,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
         public decimal Total =>  Quantity * UnitPrice + Profit + Partnership;
 
-        public Item(string id, string description, decimal quantity, decimal unitPrice)
+        public Item(decimal id, string description, decimal quantity, decimal unitPrice)
         {
             Console.WriteLine("creating item");
             this._id = id;
@@ -50,47 +50,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
             OnPropertyChanged(nameof(Total)); // Notify UI when Quantity changes
         }
 
-        bool IdIsValid(string id)
+        public int CompareTo(Item? other)
         {
-            if (id.Length < 1)
-            {
-                return false;
-            }
-            
-            foreach (char ch in id)
-            {
-                if (!(char.IsDigit(ch) || ch.ToString() == "."))
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        public int CompareTo(object obj)
-        {
-            if (obj is not Item)
-            {
-                return this.GetHashCode() - obj.GetHashCode();
-            }
-
-            Item that = obj as Item;
-
-            if (!IdIsValid(this.Id))
-            {
-                this.Id = "0";
-            }
-            
-            if (!IdIsValid(that.Id))
-            {
-                that.Id = "0";
-            }
-            
-            int thisId = int.Parse(string.Join("", this.Id.Split(".")));
-            int thatId = int.Parse(string.Join("", that.Id.Split(".")));
-            
-            return thisId.CompareTo(thatId);
-
+            return this.Id.CompareTo(other.Id);
         }
     }

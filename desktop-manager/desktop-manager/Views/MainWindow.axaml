@@ -14,8 +14,9 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    
-        <Grid RowDefinitions="Auto, Auto, Auto" ColumnDefinitions="*">
+    <ScrollViewer>
+        
+        <Grid RowDefinitions="Auto, Auto, Auto, Auto" ColumnDefinitions="*">
             
             <Grid Grid.Row="0" Height="100" Background="#B00">
                 <TextPresenter VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5, 20" Foreground="#F6F6F6" FontSize="28" Grid.Row="0" Grid.Column="0">Balaio - Contrução Civil</TextPresenter>
@@ -150,7 +151,7 @@
                 <DataGrid.Columns>
                 
                     <!-- ID Column -->
-                    <DataGridTextColumn Header="#" Binding="{Binding Id}" />
+                    <DataGridTextColumn Header="#" Binding="{Binding Id, StringFormat=F2}" />
 
                     <!-- Description Column -->
                     <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*" />
@@ -173,5 +174,11 @@
                 </DataGrid.Columns>
                 
             </DataGrid>
+            
+            <Button Grid.Row="3" Background="Red" Content="Generate" Command="{Binding GenerateQuotePdf}"></Button>
         </Grid>
+        
+    </ScrollViewer>
+    
+        
 </Window>
