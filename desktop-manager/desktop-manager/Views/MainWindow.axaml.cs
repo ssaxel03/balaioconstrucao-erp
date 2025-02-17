@@ -1,3 +1,4 @@
+using System;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
@@ -12,26 +13,12 @@ namespace desktop_manager.Views
         {
             InitializeComponent();
             this.DataContext = new MainWindowViewModel();  // Set DataContext here
+            this.FindControl<ContentControl>("MainContentControl").Content = new NewQuote();
         }
 
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-        }
-
-        private void Button_OnClick(object? sender, RoutedEventArgs e)
-        {
-            (this.DataContext as MainWindowViewModel)?.AddRow();
-        }
-
-        private void SortItems(object? sender, DataGridCellEditEndedEventArgs e)
-        {
-            (this.DataContext as MainWindowViewModel)?.SortItems();
-        }
-
-        private void GenerateQuotePdf()
-        {
-            (this.DataContext as MainWindowViewModel)?.GenerateQuotePdf();
         }
     }
 }
