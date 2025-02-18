@@ -88,16 +88,13 @@
             
             </Grid>
             
-            <DataGrid Grid.Row="2" Margin="5, 5" ItemsSource="{Binding Items}" AutoGenerateColumns="False" CanUserSortColumns="False" GridLinesVisibility="All" HorizontalGridLinesBrush="#181818" VerticalGridLinesBrush="#181818" CellEditEnded="SortItems">
+            <DataGrid Grid.Row="2" Margin="5, 5" ItemsSource="{Binding Items}" AutoGenerateColumns="False" CanUserSortColumns="False" CellEditEnded="SortItems">
                 <DataGrid.Styles>
                     <!-- Style for the DataGrid -->
                     <Style Selector="DataGrid">
                         <Setter Property="Background" Value="#E6E6E6"/>
                         <Setter Property="Foreground" Value="#181818"/>
                         <Setter Property="FontSize" Value="14"></Setter>
-                        <Setter Property="BorderBrush" Value="#181818"></Setter>
-                        <Setter Property="BorderThickness" Value="1, 1, 1, 0"></Setter>
-                        <Setter Property="GridLinesVisibility" Value="All"></Setter>
                     </Style>
 
                     <!-- Style for the DataGrid Headers -->
@@ -105,9 +102,8 @@
                         <Setter Property="Background" Value="#C6C6C6"/>
                         <Setter Property="Foreground" Value="#181818"/>
                         <Setter Property="FontSize" Value="14"></Setter>
-                        <Setter Property="SeparatorBrush" Value="#181818"></Setter>
-                        <Setter Property="BorderBrush" Value="#181818"></Setter>
-                        <Setter Property="BorderThickness" Value="0, 0, 0, 1"></Setter>
+                        <Setter Property="AreSeparatorsVisible" Value="False"></Setter>
+                        <Setter Property="TextBlock.TextTrimming" Value="None"/>
                     </Style>
                     
                     <Style Selector="DataGridColumnHeader:pointerover /template/ Grid#PART_ColumnHeaderRoot">
@@ -130,6 +126,11 @@
                         <Setter Property="Background" Value="#E6E6E6"/>
                         <Setter Property="Foreground" Value="#181818"/>
                         <Setter Property="FontSize" Value="14"></Setter>
+                        <Setter Property="TextBlock.TextAlignment" Value="Right"></Setter>
+                    </Style>
+                    
+                    <Style Selector="DataGridCell.text">
+                        <Setter Property="TextBlock.TextAlignment" Value="Left"></Setter>
                     </Style>
                     
                     <Style Selector="DataGridRow:selected /template/ Rectangle#BackgroundRectangle">
@@ -140,25 +141,25 @@
                 <DataGrid.Columns>
                 
                     <!-- ID Column -->
-                    <DataGridTextColumn Header="#" Binding="{Binding Id}" />
+                    <DataGridTextColumn Header="#" Binding="{Binding Id}" CellStyleClasses="text" />
 
                     <!-- Description Column -->
-                    <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*" />
+                    <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="7*" CellStyleClasses="text" />
 
                     <!-- Quantity Column -->
-                    <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" />
+                    <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" CellStyleClasses="text" />
 
                     <!-- Unit Price Column -->
-                    <DataGridTextColumn Header="Unit Price" Binding="{Binding UnitPrice}" />
+                    <DataGridTextColumn Header="Unit Price" Binding="{Binding UnitPrice, StringFormat='{}{0} €'}" />
 
                     <!-- Profit Column (Read-Only) -->
-                    <DataGridTextColumn Header="Profit" Binding="{Binding Profit, StringFormat=F2}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Profit" Binding="{Binding Profit, StringFormat='{}{0} €'}" IsReadOnly="True" />
                     
                     <!-- Partnership Column (Read-Only) -->
-                    <DataGridTextColumn Header="Partnership" Binding="{Binding Partnership, StringFormat=F2}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Partnership" Binding="{Binding Partnership, StringFormat='{}{0} €'}" IsReadOnly="True" />
                     
                     <!-- Total Column (Read-Only) -->
-                    <DataGridTextColumn Header="Total" Binding="{Binding Total, StringFormat=F2}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Total" Binding="{Binding Total, StringFormat='{}{0} €'}" IsReadOnly="True" />
                 
                 </DataGrid.Columns>
                 

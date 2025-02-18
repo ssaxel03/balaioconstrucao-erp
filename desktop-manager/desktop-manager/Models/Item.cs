@@ -19,11 +19,11 @@ using CommunityToolkit.Mvvm.ComponentModel;
         [ObservableProperty]
         private decimal _unitPrice;
         
-        public decimal Profit => Quantity * UnitPrice * 0.3m;
+        public decimal Profit => Math.Round(Quantity * UnitPrice * 0.3m, 2, MidpointRounding.AwayFromZero);
 
-        public decimal Partnership => ((Profit + (Quantity * UnitPrice)) / 0.85m) * 0.15m; 
+        public decimal Partnership => Math.Round(((Profit + (Quantity * UnitPrice)) / 0.85m) * 0.15m, 2, MidpointRounding.AwayFromZero); 
 
-        public decimal Total =>  Quantity * UnitPrice + Profit + Partnership;
+        public decimal Total => Math.Round(Quantity * UnitPrice + Profit + Partnership, 2, MidpointRounding.AwayFromZero);
 
         public Item(decimal id, string description, decimal quantity, decimal unitPrice)
         {
