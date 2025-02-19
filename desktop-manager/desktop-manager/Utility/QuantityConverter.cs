@@ -11,7 +11,7 @@ public class QuantityConverter : IValueConverter
     {
         if (value is decimal decimalValue)
         {
-            return decimalValue; // Display the raw number
+            return Math.Abs(decimalValue); // Display the raw number
         }
         return 0m; // If somehow invalid, reset to 0
     }
@@ -22,7 +22,7 @@ public class QuantityConverter : IValueConverter
         {
             if (decimal.TryParse(stringValue, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal result))
             {
-                return result; // If valid, return number
+                return Math.Abs(result); // If valid, return number
             }
         }
         return 0m; // If invalid, reset to 0

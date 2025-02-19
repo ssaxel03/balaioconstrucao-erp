@@ -89,7 +89,12 @@
             
             </Grid>
             
-            <DataGrid Grid.Row="2" Margin="5, 5" ItemsSource="{Binding Items}" AutoGenerateColumns="False" CanUserSortColumns="False" CellEditEnded="SortItems">
+            <DataGrid Grid.Row="2" 
+                      Margin="5, 5" 
+                      ItemsSource="{Binding Items}" 
+                      AutoGenerateColumns="False" 
+                      CanUserSortColumns="False" 
+                      CellEditEnded="SortItems">
                 
                 <DataGrid.Resources>
                     <utility:CurrencyConverter x:Key="CurrencyConverter"/>

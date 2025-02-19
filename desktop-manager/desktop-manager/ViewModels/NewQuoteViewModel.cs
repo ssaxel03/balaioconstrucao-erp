@@ -5,6 +5,7 @@ using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using desktop_manager.Models;
 using System.IO;
+using desktop_manager.Utility;
 using desktop_manager.ViewModels;
 using iText.Kernel.Pdf;
 using iText.Layout;
@@ -18,24 +19,25 @@ public partial class NewQuoteViewModel : ViewModelBase
         [ObservableProperty]
         private ObservableCollection<Item> _items = new()
         {
-            new Item(1.1m, "Laptop", 1m, 1200.00m),
-            new Item(1.2m, "Tablet", 2m, 400.00m),
-            new Item(1.3m, "Phone", 3m, 300.00m),
-            new Item(1.4m, "Headphones", 1m, 150.00m),
-            new Item(1.5m, "Desk", 5.60m, 80.00m),
+            new Item("1.1", "Laptop", 1m, 1200.00m),
+            new Item("1.2", "Tablet", 2m, 400.00m),
+            new Item("1.3", "Phone", 3m, 300.00m),
+            new Item("1.4", "Headphones", 1m, 150.00m),
+            new Item("1.5", "Desk", 5.60m, 80.00m),
         };
         
         public void AddRow()
         {
-            
-            Items.Add(new Item(0.0m, "Placeholder", 0.00m, 0.00m));
+            Items.Add(new Item("0.0", "Placeholder", 0.00m, 0.00m));
         }
         
         public void SortItems()
         {
             Console.WriteLine("sorting items");
+            
             List<Item> sortedItems = Items.ToList();
-            sortedItems.Sort();
+            sortedItems.Sort(new HierarchicalIdComparer());
+            
             Items.Clear();
             foreach (var item in sortedItems)
             {
@@ -67,7 +69,7 @@ public partial class NewQuoteViewModel : ViewModelBase
                 // Add Table Rows
                 foreach (var item in Items)
                 {
-                    table.AddCell(item.Id.ToString());
+                    table.AddCell(item.Id);
                     table.AddCell(item.Description);
                     table.AddCell(item.Quantity.ToString());
                     table.AddCell(item.UnitPrice.ToString("C2"));

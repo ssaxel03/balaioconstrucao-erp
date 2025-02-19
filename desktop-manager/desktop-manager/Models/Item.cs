@@ -5,10 +5,10 @@ using Avalonia.Animation;
 namespace desktop_manager.Models;
 
 using CommunityToolkit.Mvvm.ComponentModel;
-    public partial class Item : ObservableObject, IComparable<Item>
+    public partial class Item : ObservableObject
     {
         [ObservableProperty]
-        private decimal _id;
+        private string _id;
         
         [ObservableProperty]
         private string _description;
@@ -25,7 +25,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
         public decimal Total => Math.Round(Quantity * UnitPrice + Profit + Partnership, 2, MidpointRounding.AwayFromZero);
 
-        public Item(decimal id, string description, decimal quantity, decimal unitPrice)
+        public Item(string id, string description, decimal quantity, decimal unitPrice)
         {
             Console.WriteLine("creating item");
             this._id = id;
@@ -39,8 +39,6 @@ using CommunityToolkit.Mvvm.ComponentModel;
             OnPropertyChanged(nameof(Profit)); // Notify UI when Quantity changes
             OnPropertyChanged(nameof(Partnership)); // Notify UI when Quantity changes
             OnPropertyChanged(nameof(Total)); // Notify UI when Quantity changes
-
-
         }
 
         partial void OnUnitPriceChanged(decimal oldValue, decimal newValue)
@@ -48,10 +46,5 @@ using CommunityToolkit.Mvvm.ComponentModel;
             OnPropertyChanged(nameof(Profit)); // Notify UI when Quantity changes
             OnPropertyChanged(nameof(Partnership)); // Notify UI when Quantity changes
             OnPropertyChanged(nameof(Total)); // Notify UI when Quantity changes
-        }
-
-        public int CompareTo(Item? other)
-        {
-            return this.Id.CompareTo(other.Id);
         }
     }

@@ -1,5 +1,7 @@
+using System;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using desktop_manager.ViewModels;
@@ -22,18 +24,16 @@ public partial class NewQuote : UserControl
     
     private void Button_OnClick(object? sender, RoutedEventArgs e)
     {
-        (this.DataContext as MainWindowViewModel)?.AddRow();
+        (this.DataContext as NewQuoteViewModel)?.AddRow();
     }
     
     private void SortItems(object? sender, DataGridCellEditEndedEventArgs e)
     {
-        (this.DataContext as MainWindowViewModel)?.SortItems();
+        (this.DataContext as NewQuoteViewModel)?.SortItems();
     }
     
     private void GenerateQuotePdf()
     {
-        (this.DataContext as MainWindowViewModel)?.GenerateQuotePdf();
+        (this.DataContext as NewQuoteViewModel)?.GenerateQuotePdf();
     }
-    
-    
 }
