@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:desktop_manager.ViewModels"
+             xmlns:utility="clr-namespace:desktop_manager.Utility"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="desktop_manager.Views.NewQuote"
              x:DataType="vm:NewQuoteViewModel">
@@ -89,6 +90,12 @@
             </Grid>
             
             <DataGrid Grid.Row="2" Margin="5, 5" ItemsSource="{Binding Items}" AutoGenerateColumns="False" CanUserSortColumns="False" CellEditEnded="SortItems">
+                
+                <DataGrid.Resources>
+                    <utility:CurrencyConverter x:Key="CurrencyConverter"/>
+                    <utility:QuantityConverter x:Key="QuantityConverter" />
+                </DataGrid.Resources>
+                
                 <DataGrid.Styles>
                     <!-- Style for the DataGrid -->
                     <Style Selector="DataGrid">
@@ -129,12 +136,52 @@
                         <Setter Property="TextBlock.TextAlignment" Value="Right"></Setter>
                     </Style>
                     
+                    <Style Selector="DataGridRow:selected">
+                        <Setter Property="Foreground" Value="#E6E6E6"></Setter>
+                    </Style>
+                    
+                    <Style Selector="DataGridCell:current /template/ Rectangle#CurrencyVisual">
+                        <Setter Property="IsVisible" Value="False" />
+                    </Style>
+                    
+                    <Style Selector="DataGridCell:focus /template/ Grid#FocusVisual">
+                        <Setter Property="IsVisible" Value="False" />
+                    </Style>
+                    
                     <Style Selector="DataGridCell.text">
                         <Setter Property="TextBlock.TextAlignment" Value="Left"></Setter>
                     </Style>
                     
                     <Style Selector="DataGridRow:selected /template/ Rectangle#BackgroundRectangle">
                         <Setter Property="Fill" Value="#B00"></Setter>
+                    </Style>
+                    
+                    <!-- Styles for editable cells (textboxes) -->
+                    <Style Selector="TextBox">
+                        <Setter Property="Background" Value="#E6E6E6"></Setter>
+                        <Setter Property="Foreground" Value="#181818"></Setter>
+                        <Setter Property="CaretBrush" Value="#181818"></Setter>
+                        <Setter Property="SelectionBrush" Value="#B00"></Setter>
+                        <Setter Property="SelectionForegroundBrush" Value="#E6E6E6"></Setter>
+                    </Style>
+                    <Style Selector="TextBox:pointerover">
+                        <Setter Property="Foreground" Value="#181818"></Setter>
+                    </Style>
+                    <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
+                        <Setter Property="Background" Value="#D6D6D6"></Setter>
+                    </Style>
+                    <Style Selector="TextBox:pointerover /template/ TextBlock#PART_Watermark">
+                        <Setter Property="Foreground" Value="#181818" />
+                    </Style>
+                    <Style Selector="TextBox:focus">
+                        <Setter Property="Foreground" Value="#181818"></Setter>
+                    </Style>
+                    <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+                        <Setter Property="Background" Value="#D6D6D6"></Setter>
+                        <Setter Property="BorderBrush" Value="#B00"></Setter>
+                    </Style>
+                    <Style Selector="TextBox:focus /template/ TextBlock#PART_Watermark">
+                        <Setter Property="Foreground" Value="#181818" />
                     </Style>
                 </DataGrid.Styles>
                 
@@ -147,19 +194,19 @@
                     <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="7*" CellStyleClasses="text" />
 
                     <!-- Quantity Column -->
-                    <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" CellStyleClasses="text" />
+                    <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity, Converter={StaticResource QuantityConverter}}" CellStyleClasses="text" />
 
                     <!-- Unit Price Column -->
-                    <DataGridTextColumn Header="Unit Price" Binding="{Binding UnitPrice, StringFormat='{}{0} €'}" />
+                    <DataGridTextColumn Header="Unit Price" Binding="{Binding UnitPrice, Converter={StaticResource CurrencyConverter}}" />
 
                     <!-- Profit Column (Read-Only) -->
-                    <DataGridTextColumn Header="Profit" Binding="{Binding Profit, StringFormat='{}{0} €'}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Profit" Binding="{Binding Profit, Converter={StaticResource CurrencyConverter}}" IsReadOnly="True" />
                     
                     <!-- Partnership Column (Read-Only) -->
-                    <DataGridTextColumn Header="Partnership" Binding="{Binding Partnership, StringFormat='{}{0} €'}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Partnership" Binding="{Binding Partnership, Converter={StaticResource CurrencyConverter}}" IsReadOnly="True" />
                     
                     <!-- Total Column (Read-Only) -->
-                    <DataGridTextColumn Header="Total" Binding="{Binding Total, StringFormat='{}{0} €'}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Total" Binding="{Binding Total, Converter={StaticResource CurrencyConverter}}" IsReadOnly="True" />
                 
                 </DataGrid.Columns>
                 
