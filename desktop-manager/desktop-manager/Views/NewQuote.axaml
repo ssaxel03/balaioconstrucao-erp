@@ -70,7 +70,7 @@
                        Grid.Column="0" 
                        Margin="0, 0, 5, 0" 
                        FontWeight="Bold">
-                    Cliente
+                    Client
                 </Label>
             
                 <Grid RowDefinitions="Auto, Auto" 
@@ -79,7 +79,7 @@
                       Margin="0, 0, 5, 0">
                     <Label Foreground="#181818" 
                            Grid.Row="0">
-                        Nome
+                        Name
                     </Label>
                     <TextBox Grid.Row="1"/>
                 </Grid>
@@ -90,7 +90,7 @@
                       Margin="0, 0, 5, 0">
                     <Label Foreground="#181818" 
                            Grid.Row="0">
-                        Morada
+                        Address
                     </Label>
                     <TextBox Grid.Row="1"/>
                 </Grid>
@@ -99,7 +99,7 @@
                        Grid.Column="1" 
                        Margin="5, 0, 0, 0" 
                        FontWeight="Bold">
-                    Documento
+                    Document
                 </Label>
             
                 <Grid RowDefinitions="Auto, Auto" 
@@ -108,7 +108,7 @@
                       Margin="5, 0, 0, 0">
                     <Label Foreground="#181818" 
                            Grid.Row="0">
-                        Assunto
+                        Subject
                     </Label>
                     <TextBox Grid.Row="1"></TextBox>
                 </Grid>
@@ -120,10 +120,10 @@
                             Grid.ColumnSpan="3" 
                             Margin="5, 0, 0, 0" 
                             Orientation="Horizontal">
-                    <CheckBox>Opções</CheckBox>
+                    <CheckBox>Options</CheckBox>
                     <CheckBox>Autos</CheckBox>
-                    <CheckBox IsChecked="{Binding IsCondominium}">Condomínio</CheckBox>
-                    <CheckBox>IVA</CheckBox>
+                    <CheckBox IsChecked="{Binding IsCondominium}">Condominium</CheckBox>
+                    <CheckBox>VAT</CheckBox>
                 </StackPanel>
             
             </Grid>
