@@ -28,7 +28,7 @@
                         <Setter Property="Background" Value="#E6E6E6"></Setter>
                     </Style>
                     <Style Selector="CheckBox:pointerover /template/ Border#NormalRectangle">
-                        <Setter Property="Background" Value="#D6D6D6"></Setter>
+                        <Setter Property="Background" Value="#C6C6C6"></Setter>
                     </Style>
                     <Style Selector="CheckBox:checked /template/ Border#NormalRectangle">
                         <Setter Property="BorderThickness" Value="0"></Setter>
@@ -49,7 +49,7 @@
                         <Setter Property="Foreground" Value="#181818"></Setter>
                     </Style>
                     <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
-                        <Setter Property="Background" Value="#D6D6D6"></Setter>
+                        <Setter Property="Background" Value="#C6C6C6"></Setter>
                     </Style>
                     <Style Selector="TextBox:pointerover /template/ TextBlock#PART_Watermark">
                         <Setter Property="Foreground" Value="#181818" />
@@ -58,7 +58,7 @@
                         <Setter Property="Foreground" Value="#181818"></Setter>
                     </Style>
                     <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
-                        <Setter Property="Background" Value="#D6D6D6"></Setter>
+                        <Setter Property="Background" Value="#C6C6C6"></Setter>
                         <Setter Property="BorderBrush" Value="#B00"></Setter>
                     </Style>
                     <Style Selector="TextBox:focus /template/ TextBlock#PART_Watermark">
@@ -154,29 +154,28 @@
 
                     <!-- Style for the DataGrid Headers -->
                     <Style Selector="DataGridColumnHeader">
-                        <Setter Property="Background" Value="#C6C6C6"/>
-                        <Setter Property="Foreground" Value="#181818"/>
+                        <Setter Property="Background" Value="#B00"/>
+                        <Setter Property="Foreground" Value="#E6E6E6"/>
                         <Setter Property="FontSize" Value="14"></Setter>
                         <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
                         <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
                         <Setter Property="AreSeparatorsVisible" Value="False"></Setter>
-                        <Setter Property="TextBlock.TextTrimming" Value="None"/>
                         <Setter Property="TextBlock.TextWrapping" Value="WrapWithOverflow"></Setter>
                         <Setter Property="Padding" Value="1, 0"></Setter>
                         <Setter Property="Margin" Value="0"></Setter>
                     </Style>
                     
                     <Style Selector="DataGridColumnHeader:pointerover /template/ Grid#PART_ColumnHeaderRoot">
-                        <Setter Property="Background" Value="#C6C6C6"/>
+                        <Setter Property="Background" Value="#B00"/>
                     </Style>
                     
                     <Style Selector="DataGridColumnHeader:pressed /template/ Grid#PART_ColumnHeaderRoot">
-                        <Setter Property="Background" Value="#C6C6C6"/>
+                        <Setter Property="Background" Value="#B00"/>
                     </Style>
 
                     <!-- Style for the hovered row -->
                     <Style Selector="DataGridRow:pointerover">
-                        <Setter Property="Background" Value="#D6D6D6"/>
+                        <Setter Property="Background" Value="#C6C6C6"/>
                         <Setter Property="Foreground" Value="#181818"/>
                         <Setter Property="FontSize" Value="14"></Setter>
                     </Style>
@@ -186,6 +185,7 @@
                         <Setter Property="Background" Value="#E6E6E6"/>
                         <Setter Property="Foreground" Value="#181818"/>
                         <Setter Property="FontSize" Value="14"></Setter>
+                        <Setter Property="TextBlock.TextTrimming" Value="CharacterEllipsis"/>
                     </Style>
                     
                     <Style Selector="DataGridRow:selected">
@@ -232,7 +232,7 @@
                         <Setter Property="Foreground" Value="#181818"></Setter>
                     </Style>
                     <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
-                        <Setter Property="Background" Value="#D6D6D6"></Setter>
+                        <Setter Property="Background" Value="#C6C6C6"></Setter>
                     </Style>
                     <Style Selector="TextBox:pointerover /template/ TextBlock#PART_Watermark">
                         <Setter Property="Foreground" Value="#181818" />
@@ -241,7 +241,7 @@
                         <Setter Property="Foreground" Value="#181818"></Setter>
                     </Style>
                     <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
-                        <Setter Property="Background" Value="#D6D6D6"></Setter>
+                        <Setter Property="Background" Value="#C6C6C6"></Setter>
                         <Setter Property="BorderBrush" Value="#B00"></Setter>
                     </Style>
                     <Style Selector="TextBox:focus /template/ TextBlock#PART_Watermark">

@@ -28,27 +28,37 @@
         <Grid Grid.Row="1" 
               ColumnDefinitions="*, 6*">
             
-            <Grid Grid.Column="0" 
-                  RowDefinitions="Auto, Auto" 
-                  Background="#969696">
+            <StackPanel Grid.Column="0" 
+                        Orientation="Vertical"
+                        Background="#C6C6C6">
                 
-                <Button Grid.Row="0" 
-                        VerticalAlignment="Center" 
-                        HorizontalAlignment="Center" 
-                        FontSize="18" 
-                        Foreground="#181818">
-                    My company
-                </Button>
+                <StackPanel.Styles>
+                    <Style Selector="Button">
+                        <Setter Property="Background" Value="#C6C6C6"></Setter>
+                        <Setter Property="Foreground" Value="#181818"></Setter>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+                        <Setter Property="Margin" Value="0"></Setter>
+                        <Setter Property="CornerRadius" Value="0"></Setter>
+                        <Setter Property="BorderThickness" Value="0"></Setter>
+                    </Style>
+                    <Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+                        <Setter Property="Background" Value="#B00" />
+                        <Setter Property="Foreground" Value="#E6E6E6" />
+                    </Style>
+                    <Style Selector="Button:pressed  /template/ ContentPresenter#PART_ContentPresenter">
+                        <Setter Property="Background" Value="#A00" />
+                        <Setter Property="Foreground" Value="#E6E6E6" />
+                    </Style>
+                    <Style Selector="Button:pressed">
+                        <Setter Property="RenderTransform" Value="scale(1)" />
+                    </Style>
+                </StackPanel.Styles>
                 
-                <Button Grid.Row="1" 
-                        VerticalAlignment="Center" 
-                        HorizontalAlignment="Center" 
-                        FontSize="18" 
-                        Foreground="#181818">
-                    New quote
-                </Button>
-
-            </Grid>
+                <Button Content="My Company" HorizontalAlignment="Stretch"/>
+                <Button Content="Preferences" HorizontalAlignment="Stretch"/>
+                <Button Content="New Quote" HorizontalAlignment="Stretch"/>
+                <!-- Add more buttons as ye see fit -->
+            </StackPanel>
         
             <ContentControl Grid.Column="1" 
                             Name="MainContentControl" 
