@@ -26,6 +26,21 @@ public partial class NewQuoteViewModel : ViewModelBase
             new Item("1.5", "Desk", 5.60m, 80.00m),
         };
         
+        [ObservableProperty]
+        private bool _isCondominium; // Bound to CheckBox
+
+        public int Partnership => IsCondominium ? 15 : 0; // Auto-updates
+
+        partial void OnIsCondominiumChanged(bool value)
+        {
+            Console.WriteLine(_isCondominium);
+            
+            foreach (Item item in Items)
+            {
+                item.SetPartnershipCoefficient(value ? 15 : 0);
+            }
+        }
+        
         public void AddRow()
         {
             Items.Add(new Item("0.0", "Placeholder", 0.00m, 0.00m));
@@ -51,6 +66,7 @@ public partial class NewQuoteViewModel : ViewModelBase
 
             using (FileStream stream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
             {
+                
                 PdfWriter writer = new PdfWriter(stream);
                 PdfDocument pdf = new PdfDocument(writer);
                 Document document = new Document(pdf);

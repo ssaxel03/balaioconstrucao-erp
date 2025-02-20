@@ -24,13 +24,14 @@
                         <Setter Property="FontSize" Value="12"></Setter>
                     </Style>
                     <Style Selector="CheckBox:unchecked /template/ Border#NormalRectangle">
-                        <Setter Property="BorderThickness" Value="1"></Setter>
-                        <Setter Property="BorderBrush" Value="#181818"/>
-                        <Setter Property="Background" Value="#F6F6F6"></Setter>
+                        <Setter Property="BorderThickness" Value="0"></Setter>
+                        <Setter Property="Background" Value="#E6E6E6"></Setter>
+                    </Style>
+                    <Style Selector="CheckBox:pointerover /template/ Border#NormalRectangle">
+                        <Setter Property="Background" Value="#D6D6D6"></Setter>
                     </Style>
                     <Style Selector="CheckBox:checked /template/ Border#NormalRectangle">
-                        <Setter Property="BorderThickness" Value="1"></Setter>
-                        <Setter Property="BorderBrush" Value="#181818"/>
+                        <Setter Property="BorderThickness" Value="0"></Setter>
                         <Setter Property="Background" Value="#B00"></Setter>
                     </Style>
                     <Style Selector="CheckBox /template/ ContentPresenter">
@@ -121,7 +122,7 @@
                             Orientation="Horizontal">
                     <CheckBox>Opções</CheckBox>
                     <CheckBox>Autos</CheckBox>
-                    <CheckBox>Condomínio</CheckBox>
+                    <CheckBox IsChecked="{Binding IsCondominium}">Condomínio</CheckBox>
                     <CheckBox>IVA</CheckBox>
                 </StackPanel>
             
