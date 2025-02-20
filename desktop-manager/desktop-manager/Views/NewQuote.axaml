@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:desktop_manager.ViewModels"
              xmlns:utility="clr-namespace:desktop_manager.Utility"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d"
              x:Class="desktop_manager.Views.NewQuote"
              x:DataType="vm:NewQuoteViewModel">
     
@@ -129,10 +129,12 @@
             </Grid>
             
             <DataGrid Grid.Row="2" 
+                      x:Name="ItemsDataGrid"
                       Margin="5, 5" 
                       ItemsSource="{Binding Items}" 
                       AutoGenerateColumns="False" 
-                      CanUserSortColumns="False" 
+                      CanUserSortColumns="False"
+                      ColumnWidth="2*"
                       CellEditEnded="SortItems">
                 
                 <DataGrid.Resources>
@@ -155,8 +157,13 @@
                         <Setter Property="Background" Value="#C6C6C6"/>
                         <Setter Property="Foreground" Value="#181818"/>
                         <Setter Property="FontSize" Value="14"></Setter>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+                        <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
                         <Setter Property="AreSeparatorsVisible" Value="False"></Setter>
                         <Setter Property="TextBlock.TextTrimming" Value="None"/>
+                        <Setter Property="TextBlock.TextWrapping" Value="WrapWithOverflow"></Setter>
+                        <Setter Property="Padding" Value="1, 0"></Setter>
+                        <Setter Property="Margin" Value="0"></Setter>
                     </Style>
                     
                     <Style Selector="DataGridColumnHeader:pointerover /template/ Grid#PART_ColumnHeaderRoot">
@@ -179,11 +186,14 @@
                         <Setter Property="Background" Value="#E6E6E6"/>
                         <Setter Property="Foreground" Value="#181818"/>
                         <Setter Property="FontSize" Value="14"></Setter>
-                        <Setter Property="TextBlock.TextAlignment" Value="Right"></Setter>
                     </Style>
                     
                     <Style Selector="DataGridRow:selected">
                         <Setter Property="Foreground" Value="#E6E6E6"></Setter>
+                    </Style>
+                    
+                    <Style Selector="DataGridCell TextBlock">
+                        <Setter Property="Margin" Value="5, 0"></Setter>
                     </Style>
                     
                     <Style Selector="DataGridCell:current /template/ Rectangle#CurrencyVisual">
@@ -195,7 +205,15 @@
                     </Style>
                     
                     <Style Selector="DataGridCell.text">
-                        <Setter Property="TextBlock.TextAlignment" Value="Left"></Setter>
+                        <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
+                    </Style>
+                    
+                    <Style Selector="DataGridCell.description">
+                        <Setter Property="TextBlock.TextAlignment" Value="Justify"></Setter>
+                    </Style>
+                    
+                    <Style Selector="DataGridCell.currency">
+                        <Setter Property="TextBlock.TextAlignment" Value="Right"></Setter>
                     </Style>
                     
                     <Style Selector="DataGridRow:selected /template/ Rectangle#BackgroundRectangle">
@@ -229,6 +247,14 @@
                     <Style Selector="TextBox:focus /template/ TextBlock#PART_Watermark">
                         <Setter Property="Foreground" Value="#181818" />
                     </Style>
+                    
+                    <Style Selector="DataGridCell.description TextBox">
+                        <Setter Property="TextWrapping" Value="WrapWithOverflow" />
+                    </Style>
+                    
+                    <Style Selector="DataGridCell.description TextBlock">
+                        <Setter Property="TextWrapping" Value="WrapWithOverflow" />
+                    </Style>
                 </DataGrid.Styles>
                 
                 <DataGrid.Columns>
@@ -236,37 +262,43 @@
                     <!-- ID Column -->
                     <DataGridTextColumn Header="#" 
                                         Binding="{Binding Id}" 
-                                        CellStyleClasses="text" />
+                                        CellStyleClasses="text"
+                                        Width="*"
+                                        MinWidth="30"/>
 
                     <!-- Description Column -->
                     <DataGridTextColumn Header="Description" 
-                                        Binding="{Binding Description}" 
-                                        Width="7*" 
-                                        CellStyleClasses="text" />
+                                        Binding="{Binding Description}"
+                                        CellStyleClasses="text description"
+                                        Width="10*"/>
 
                     <!-- Quantity Column -->
                     <DataGridTextColumn Header="Quantity" 
                                         Binding="{Binding Quantity, Converter={StaticResource QuantityConverter}}" 
-                                        CellStyleClasses="text" />
+                                        CellStyleClasses="text"/>
 
                     <!-- Unit Price Column -->
                     <DataGridTextColumn Header="Unit Price" 
-                                        Binding="{Binding UnitPrice, Converter={StaticResource CurrencyConverter}}" />
+                                        Binding="{Binding UnitPrice, Converter={StaticResource CurrencyConverter}}"
+                                        CellStyleClasses="currency"/>
 
                     <!-- Profit Column (Read-Only) -->
                     <DataGridTextColumn Header="Profit" 
                                         Binding="{Binding Profit, Converter={StaticResource CurrencyConverter}}" 
-                                        IsReadOnly="True" />
+                                        IsReadOnly="True" 
+                                        CellStyleClasses="currency"/>
                     
                     <!-- Partnership Column (Read-Only) -->
                     <DataGridTextColumn Header="Partnership" 
                                         Binding="{Binding Partnership, Converter={StaticResource CurrencyConverter}}" 
-                                        IsReadOnly="True" />
+                                        IsReadOnly="True"
+                                        CellStyleClasses="currency"/>
                     
                     <!-- Total Column (Read-Only) -->
                     <DataGridTextColumn Header="Total" 
                                         Binding="{Binding Total, Converter={StaticResource CurrencyConverter}}" 
-                                        IsReadOnly="True" />
+                                        IsReadOnly="True"
+                                        CellStyleClasses="currency"/>
                 
                 </DataGrid.Columns>
                 

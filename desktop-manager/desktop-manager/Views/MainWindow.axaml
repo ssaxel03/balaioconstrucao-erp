@@ -8,7 +8,9 @@
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="desktop_manager"
-        Background="#F6F6F6">
+        Background="#F6F6F6"
+        MinHeight="480"
+        MinWidth="840">
 
     <Grid RowDefinitions="Auto, *">
         

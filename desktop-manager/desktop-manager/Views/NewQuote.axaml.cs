@@ -12,9 +12,22 @@ public partial class NewQuote : UserControl
 {
     public NewQuote()
     {
-        InitializeComponent();
         this.DataContext = new NewQuoteViewModel();  // Set DataContext here
+        
+        InitializeComponent();
 
+        this.Loaded += NewQuote_Loaded;
+    }
+    
+    private void NewQuote_Loaded(object? sender, RoutedEventArgs e)
+    {
+        // Refresh items once the UI is loaded
+        (this.DataContext as NewQuoteViewModel)?.RefreshItems();
+
+        // Optionally force the DataGrid to remeasure if needed
+        // Make sure ye give the DataGrid a name in yer XAML: x:Name="MyDataGrid"
+        ItemsDataGrid?.InvalidateMeasure();
+        ItemsDataGrid?.InvalidateVisual();
     }
     
     private void InitializeComponent()
