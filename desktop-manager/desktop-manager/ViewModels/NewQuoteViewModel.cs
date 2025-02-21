@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using desktop_manager.Models;
@@ -75,8 +76,22 @@ public partial class NewQuoteViewModel : ViewModelBase
 
         public void GenerateQuotePdf()
         {
-            string filePath = "Invoice.pdf";
+            
+            string quotesFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SimpleQuotes", "Quotes");
+            
+            Directory.CreateDirectory(quotesFolderPath);
 
+            string fileName = "Quote.pdf";
+            string filePath = Path.Combine(quotesFolderPath, fileName);
+            
+            int fileCount = 1;
+            while (File.Exists(filePath))
+            {
+                string newFileName = $"Quote ({fileCount}).pdf";
+                filePath = Path.Combine(quotesFolderPath, newFileName);
+                fileCount++;
+            }
+            
             using (FileStream stream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
             {
                 
@@ -110,6 +125,8 @@ public partial class NewQuoteViewModel : ViewModelBase
             }
             
             Console.WriteLine($"PDF generated: {filePath}");
+            
+            Process.Start(new ProcessStartInfo(filePath) { UseShellExecute = true });
         }
     
 }

@@ -21,11 +21,8 @@ public partial class NewQuote : UserControl
     
     private void NewQuote_Loaded(object? sender, RoutedEventArgs e)
     {
-        // Refresh items once the UI is loaded
         (this.DataContext as NewQuoteViewModel)?.RefreshItems();
-
-        // Optionally force the DataGrid to remeasure if needed
-        // Make sure ye give the DataGrid a name in yer XAML: x:Name="MyDataGrid"
+        
         ItemsDataGrid?.InvalidateMeasure();
         ItemsDataGrid?.InvalidateVisual();
     }
@@ -35,7 +32,7 @@ public partial class NewQuote : UserControl
         AvaloniaXamlLoader.Load(this);
     }
     
-    private void Button_OnClick(object? sender, RoutedEventArgs e)
+    private void NewItem(object? sender, RoutedEventArgs e)
     {
         (this.DataContext as NewQuoteViewModel)?.AddRow();
     }

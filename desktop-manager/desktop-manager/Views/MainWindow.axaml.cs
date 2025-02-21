@@ -23,7 +23,7 @@ namespace desktop_manager.Views
             this.DataContext = new MainWindowViewModel();  // Set DataContext here
             this._contentControl = this.FindControl<ContentControl>("MainContentControl");
             
-            string appFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Balaio-Construção Civil");
+            string appFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SimpleQuotes");
 
             if (!Directory.Exists(appFolderPath))
             {
