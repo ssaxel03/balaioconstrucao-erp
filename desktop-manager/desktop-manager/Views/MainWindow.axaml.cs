@@ -24,11 +24,8 @@ namespace desktop_manager.Views
             this._contentControl = this.FindControl<ContentControl>("MainContentControl");
             
             string appFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SimpleQuotes");
-
-            if (!Directory.Exists(appFolderPath))
-            {
-                Directory.CreateDirectory(appFolderPath);
-            }
+            
+            Directory.CreateDirectory(appFolderPath);
             
             this._newQuoteWindow = new NewQuote();
             this._companyDetailsWindow = new CompanyDetails();
