@@ -55,9 +55,14 @@
                     </Style>
                 </StackPanel.Styles>
                 
-                <Button Content="My Company" HorizontalAlignment="Stretch"/>
-                <Button Content="Preferences" HorizontalAlignment="Stretch"/>
-                <Button Content="New Quote" HorizontalAlignment="Stretch"/>
+                <Button Content="My Company"
+                        Click="CompanyDetailsButton_Click"
+                        HorizontalAlignment="Stretch"/>
+                <Button Content="Preferences" 
+                        HorizontalAlignment="Stretch"/>
+                <Button Content="New Quote" 
+                        Click="NewQuoteButton_Click" 
+                        HorizontalAlignment="Stretch"/>
                 <!-- Add more buttons as ye see fit -->
             </StackPanel>
         

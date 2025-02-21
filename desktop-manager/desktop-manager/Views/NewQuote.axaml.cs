@@ -44,9 +44,4 @@ public partial class NewQuote : UserControl
     {
         (this.DataContext as NewQuoteViewModel)?.SortItems();
     }
-    
-    private void GenerateQuotePdf()
-    {
-        (this.DataContext as NewQuoteViewModel)?.GenerateQuotePdf();
-    }
 }

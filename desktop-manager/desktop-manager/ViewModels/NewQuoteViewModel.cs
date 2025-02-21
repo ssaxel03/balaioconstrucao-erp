@@ -46,6 +46,7 @@ public partial class NewQuoteViewModel : ViewModelBase
             Items.Add(new Item("0.0", "Placeholder", 0.00m, 0.00m));
         }
         
+        
         public void SortItems()
         {
             Console.WriteLine("sorting items");
