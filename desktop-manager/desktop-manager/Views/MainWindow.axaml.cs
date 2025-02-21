@@ -1,4 +1,6 @@
 using System;
+using System.Diagnostics;
+using System.IO;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
@@ -11,9 +13,29 @@ namespace desktop_manager.Views
     {
         public MainWindow()
         {
+            
             InitializeComponent();
             this.DataContext = new MainWindowViewModel();  // Set DataContext here
-            this.FindControl<ContentControl>("MainContentControl").Content = new NewQuote();
+            
+            string appFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Balaio-Construção Civil");
+
+            if (!Directory.Exists(appFolderPath))
+            {
+                Directory.CreateDirectory(appFolderPath);
+            }
+            
+            string configFolderPath = Path.Combine(appFolderPath, "config");
+            
+            string companyDetailsFilePath = Path.Combine(configFolderPath, "company-details.json");
+            
+            if (File.Exists(companyDetailsFilePath))
+            {
+                this.FindControl<ContentControl>("MainContentControl").Content = new NewQuote();
+            }
+            else
+            {
+                this.FindControl<ContentControl>("MainContentControl").Content = new CompanyDetails();
+            }
         }
 
         private void InitializeComponent()
