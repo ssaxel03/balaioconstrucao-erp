@@ -32,11 +32,6 @@ public partial class NewQuote : UserControl
         AvaloniaXamlLoader.Load(this);
     }
     
-    private void NewItem(object? sender, RoutedEventArgs e)
-    {
-        (this.DataContext as NewQuoteViewModel)?.AddRow();
-    }
-    
     private void SortItems(object? sender, DataGridCellEditEndedEventArgs e)
     {
         (this.DataContext as NewQuoteViewModel)?.SortItems();

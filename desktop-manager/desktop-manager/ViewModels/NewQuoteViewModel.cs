@@ -138,7 +138,7 @@ public partial class NewQuoteViewModel : ViewModelBase
             // Add Logos (Company & Association)
 
             // Set top margin to leave space for the header logos
-            doc.SetTopMargin(80);
+            doc.SetTopMargin(120);
 
             // Add first page content as inline paragraphs (label in bold, value in regular)
             AddLabelValue(doc, "Quote ID:", quoteId);
