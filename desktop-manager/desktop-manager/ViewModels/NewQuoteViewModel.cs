@@ -22,6 +22,15 @@ public partial class NewQuoteViewModel : ViewModelBase
     
         private static PdfFont font = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
         private static PdfFont fontBold = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
+
+        [ObservableProperty]
+        private string _clientName;
+        
+        [ObservableProperty]
+        private string _clientAddress;
+
+        [ObservableProperty]
+        private string _subject;
     
         [ObservableProperty]
         private ObservableCollection<Item> _items = new()
@@ -104,10 +113,6 @@ public partial class NewQuoteViewModel : ViewModelBase
             string website = "www.balaioconstrucao.pt";
             string companyCellphone = "+351 926 332 656 (chamada para a rede móvel nacional)";
 
-            // Client details
-            string clientName = "Condomínio da Vinhaça";
-            string clientAddress = "Rua dos Tintos 496, 4123-321 Porto";
-
             // Quote additional details
             string subject = "Reabilitação de adega";
             string globalAmount = "67 956,40€ + VAT";
@@ -126,7 +131,7 @@ public partial class NewQuoteViewModel : ViewModelBase
             
             using (FileStream stream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
             {
-                PdfWriter writer = new PdfWriter(stream);
+            PdfWriter writer = new PdfWriter(stream);
             PdfDocument pdf = new PdfDocument(writer);
             Document doc = new Document(pdf);
 
@@ -159,8 +164,8 @@ public partial class NewQuoteViewModel : ViewModelBase
                 .SetFontSize(12)
                 .SetMarginTop(20));
 
-            AddLabelValue(doc, "Client Name:", clientName);
-            AddLabelValue(doc, "Client Address:", clientAddress);
+            AddLabelValue(doc, "Client Name:", ClientName);
+            AddLabelValue(doc, "Client Address:", ClientAddress);
 
             // Add header for Quote details
             doc.Add(new Paragraph("Quote details")
@@ -168,8 +173,8 @@ public partial class NewQuoteViewModel : ViewModelBase
                 .SetFontSize(12)
                 .SetMarginTop(20));
 
-            AddLabelValue(doc, "Subject:", subject);
-            AddLabelValue(doc, "Global Amount:", globalAmount);
+            AddLabelValue(doc, "Subject:", Subject);
+            AddLabelValue(doc, "Global Amount:", Items.Sum(item => item.Total).ToString("C2"));
 
             // Close the document – yer voyage is complete!
             doc.Close();
