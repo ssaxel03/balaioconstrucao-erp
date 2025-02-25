@@ -10,19 +10,21 @@
     
     
         
-        <Grid RowDefinitions="Auto, Auto, Auto, Auto" 
+        <Grid RowDefinitions="Auto, Auto, Auto" 
               ColumnDefinitions="*">
             
-            <Grid Grid.Row="1" 
+            <Grid Grid.Row="0" 
                   RowDefinitions="Auto, *, *" 
-                  ColumnDefinitions="*, *, *, *" 
-                  Margin="10, 10">
+                  ColumnDefinitions="*, *, *, *"
+                  Margin="0, 0, 0, 5">
                 
                 <Grid.Styles>
+                    <!-- LABEL STYLES -->
                     <Style Selector="Label">
+                        <Setter Property="FontSize" Value="14"></Setter>
                         <Setter Property="Foreground" Value="#181818"></Setter>
-                        <Setter Property="FontSize" Value="12"></Setter>
                     </Style>
+                    <!-- CHECKBOX STYLES -->
                     <Style Selector="CheckBox:unchecked /template/ Border#NormalRectangle">
                         <Setter Property="BorderThickness" Value="0"></Setter>
                         <Setter Property="Background" Value="#E6E6E6"></Setter>
@@ -35,12 +37,16 @@
                         <Setter Property="Background" Value="#B00"></Setter>
                     </Style>
                     <Style Selector="CheckBox /template/ ContentPresenter">
+                        <Setter Property="FontSize" Value="14"></Setter>
                         <Setter Property="Foreground" Value="#181818"></Setter>
                     </Style>
                     <Style Selector="CheckBox:pointerover /template/ ContentPresenter">
+                        <Setter Property="FontSize" Value="14"></Setter>
                         <Setter Property="Foreground" Value="#181818"></Setter>
                     </Style>
+                    <!-- TEXTBOX STYLES -->
                     <Style Selector="TextBox">
+                        <Setter Property="FontSize" Value="14"></Setter>
                         <Setter Property="Background" Value="#E6E6E6"></Setter>
                         <Setter Property="Foreground" Value="#181818"></Setter>
                         <Setter Property="CaretBrush" Value="#181818"></Setter>
@@ -67,18 +73,19 @@
                 </Grid.Styles>
             
                 <Label Grid.Row="0" 
-                       Grid.Column="0" 
-                       Margin="0, 0, 5, 0" 
-                       FontWeight="Bold">
+                       Grid.Column="0"
+                       FontWeight="Bold"
+                       Margin="0, 0, 0, 5">
                     Client
                 </Label>
             
                 <Grid RowDefinitions="Auto, Auto" 
                       Grid.Row="1" 
-                      Grid.Column="0" 
-                      Margin="0, 0, 5, 0">
+                      Grid.Column="0"
+                      Margin="0, 0, 0, 2">
                     <Label Foreground="#181818" 
-                           Grid.Row="0">
+                           Grid.Row="0"
+                           Margin="0, 0, 0, 1">
                         Name
                     </Label>
                     <TextBox Grid.Row="1" Text="{Binding ClientName}"/>
@@ -86,40 +93,42 @@
             
                 <Grid RowDefinitions="Auto, Auto" 
                       Grid.Row="2" 
-                      Grid.Column="0" 
-                      Margin="0, 0, 5, 0">
+                      Grid.Column="0"
+                      Margin="0, 0, 0, 2">
                     <Label Foreground="#181818" 
-                           Grid.Row="0">
+                           Grid.Row="0"
+                           Margin="0, 0, 0, 1">
                         Address
                     </Label>
                     <TextBox Grid.Row="1" Text="{Binding ClientAddress}"/>
                 </Grid>
             
                 <Label Grid.Row="0" 
-                       Grid.Column="1" 
-                       Margin="5, 0, 0, 0" 
-                       FontWeight="Bold">
+                       Grid.Column="1"
+                       FontWeight="Bold"
+                       Margin="5, 0, 0, 5">
                     Document
                 </Label>
             
                 <Grid RowDefinitions="Auto, Auto" 
                       Grid.Row="1" 
-                      Grid.Column="1" 
-                      Margin="5, 0, 0, 0">
+                      Grid.Column="1"
+                      Margin="5, 0, 0, 2">
                     <Label Foreground="#181818" 
-                           Grid.Row="0">
+                           Grid.Row="0"
+                           Margin="0, 0, 0, 1">
                         Subject
                     </Label>
                     <TextBox Grid.Row="1" Text="{Binding Subject}"/>
                 </Grid>
             
-                <StackPanel VerticalAlignment="Bottom" 
+                <StackPanel VerticalAlignment="Bottom"
                             Spacing="5" 
                             Grid.Row="2" 
                             Grid.Column="1" 
-                            Grid.ColumnSpan="3" 
-                            Margin="5, 0, 0, 0" 
-                            Orientation="Horizontal">
+                            Grid.ColumnSpan="3"
+                            Orientation="Horizontal"
+                            Margin="5, 0, 0, 0">
                     <CheckBox>Options</CheckBox>
                     <CheckBox>Autos</CheckBox>
                     <CheckBox IsChecked="{Binding IsCondominium}">Condominium</CheckBox>
@@ -128,14 +137,14 @@
             
             </Grid>
             
-            <DataGrid Grid.Row="2" 
+            <DataGrid Grid.Row="1" 
                       x:Name="ItemsDataGrid"
-                      Margin="5, 5" 
                       ItemsSource="{Binding Items}" 
                       AutoGenerateColumns="False" 
                       CanUserSortColumns="False"
                       ColumnWidth="2*"
-                      CellEditEnded="SortItems">
+                      CellEditEnded="SortItems"
+                      Margin="0, 0, 0, 5">
                 
                 <DataGrid.Resources>
                     <utility:CurrencyConverter 
@@ -304,7 +313,7 @@
                 
             </DataGrid>
             
-            <Button Grid.Row="3" 
+            <Button Grid.Row="2" 
                     Background="Red" 
                     Content="Generate" 
                     Command="{Binding GenerateQuotePdf}"></Button>
