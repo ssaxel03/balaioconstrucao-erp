@@ -24,7 +24,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
         
         public decimal Profit => Math.Round(Quantity * UnitPrice * 0.3m, 2, MidpointRounding.AwayFromZero);
 
-        public decimal Partnership => Math.Round(((Profit + (Quantity * UnitPrice)) / 0.85m) * PartnershipCoefficient, 2, MidpointRounding.AwayFromZero); 
+        public decimal Partnership => Math.Round(((Profit + (Quantity * UnitPrice)) / 0.85m) * (PartnershipCoefficient / 100m), 2, MidpointRounding.AwayFromZero); 
 
         public decimal Total => Math.Round(Quantity * UnitPrice + Profit + Partnership, 2, MidpointRounding.AwayFromZero);
 
@@ -35,7 +35,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
             this._description = description;
             this._quantity = quantity;
             this._unitPrice = unitPrice;
-            this._partnershipCoefficient = 0;
+            this._partnershipCoefficient = 15;
         }
 
         partial void OnQuantityChanged(decimal oldValue, decimal newValue)

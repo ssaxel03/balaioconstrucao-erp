@@ -43,7 +43,10 @@ public partial class NewQuoteViewModel : ViewModelBase
         };
         
         [ObservableProperty]
-        private bool _isCondominium; // Bound to CheckBox
+        private bool _isCondominium = true; // Bound to CheckBox
+        
+        [ObservableProperty]
+        private bool _vat = true; // Bound to CheckBox
 
         public int Partnership => IsCondominium ? 15 : 0; // Auto-updates
 
@@ -112,10 +115,6 @@ public partial class NewQuoteViewModel : ViewModelBase
             string companyEmail = "geral@balaioconstrucao.pt";
             string website = "www.balaioconstrucao.pt";
             string companyCellphone = "+351 926 332 656 (chamada para a rede móvel nacional)";
-
-            // Quote additional details
-            string subject = "Reabilitação de adega";
-            string globalAmount = "67 956,40€ + VAT";
             
             // TEST VALUES END
             
@@ -131,53 +130,55 @@ public partial class NewQuoteViewModel : ViewModelBase
             
             using (FileStream stream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
             {
-            PdfWriter writer = new PdfWriter(stream);
-            PdfDocument pdf = new PdfDocument(writer);
-            Document doc = new Document(pdf);
+                PdfWriter writer = new PdfWriter(stream);
+                PdfDocument pdf = new PdfDocument(writer);
+                Document doc = new Document(pdf);
 
-            // Add Logos (Company & Association)
+                // Add Logos (Company & Association)
 
-            // Set top margin to leave space for the header logos
-            doc.SetTopMargin(120);
+                // Set top margin to leave space for the header logos
+                doc.SetTopMargin(120);
 
-            // Add first page content as inline paragraphs (label in bold, value in regular)
-            AddLabelValue(doc, "Quote ID:", quoteId);
-            AddLabelValue(doc, "Date:", date);
+                // Add first page content as inline paragraphs (label in bold, value in regular)
+                AddLabelValue(doc, "Quote ID:", quoteId);
+                AddLabelValue(doc, "Date:", date);
 
-            // Add header for Company details
-            doc.Add(new Paragraph("Company ID")
-                .SetFont(fontBold)
-                .SetFontSize(12)
-                .SetMarginTop(20));
+                // Add header for Company details
+                doc.Add(new Paragraph("Company ID")
+                    .SetFont(fontBold)
+                    .SetFontSize(12)
+                    .SetMarginTop(20));
 
-            AddLabelValue(doc, "Company Name:", companyName);
-            AddLabelValue(doc, "Alvará nº:", alvara);
-            AddLabelValue(doc, "NIPC:", nipc);
-            AddLabelValue(doc, "Direção Técnica:", technicalDirector);
-            AddLabelValue(doc, "Email:", companyEmail);
-            AddLabelValue(doc, "Website:", website);
-            AddLabelValue(doc, "Cellphone:", companyCellphone);
+                AddLabelValue(doc, "Company Name:", companyName);
+                AddLabelValue(doc, "Alvará nº:", alvara);
+                AddLabelValue(doc, "NIPC:", nipc);
+                AddLabelValue(doc, "Direção Técnica:", technicalDirector);
+                AddLabelValue(doc, "Email:", companyEmail);
+                AddLabelValue(doc, "Website:", website);
+                AddLabelValue(doc, "Cellphone:", companyCellphone);
 
-            // Add header for Client details
-            doc.Add(new Paragraph("Client ID")
-                .SetFont(fontBold)
-                .SetFontSize(12)
-                .SetMarginTop(20));
+                // Add header for Client details
+                doc.Add(new Paragraph("Client ID")
+                    .SetFont(fontBold)
+                    .SetFontSize(12)
+                    .SetMarginTop(20));
 
-            AddLabelValue(doc, "Client Name:", ClientName);
-            AddLabelValue(doc, "Client Address:", ClientAddress);
+                AddLabelValue(doc, "Client Name:", ClientName);
+                AddLabelValue(doc, "Client Address:", ClientAddress);
 
-            // Add header for Quote details
-            doc.Add(new Paragraph("Quote details")
-                .SetFont(fontBold)
-                .SetFontSize(12)
-                .SetMarginTop(20));
+                // Add header for Quote details
+                doc.Add(new Paragraph("Quote details")
+                    .SetFont(fontBold)
+                    .SetFontSize(12)
+                    .SetMarginTop(20));
 
-            AddLabelValue(doc, "Subject:", Subject);
-            AddLabelValue(doc, "Global Amount:", Items.Sum(item => item.Total).ToString("C2"));
+                AddLabelValue(doc, "Subject:", Subject);
 
-            // Close the document – yer voyage is complete!
-            doc.Close();
+                string globalAmount = Items.Sum(item => item.Total).ToString("C2") + (Vat ? " + IVA" : "");
+                AddLabelValue(doc, "Global Amount:", globalAmount);
+
+                // Close the document – yer voyage is complete!
+                doc.Close();
                 
                 /*
                 PdfWriter writer = new PdfWriter(stream);
