@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -12,17 +13,18 @@ public partial class NewQuote : UserControl
 {
     public NewQuote()
     {
-        this.DataContext = new NewQuoteViewModel();  // Set DataContext here
-        
+        var start = DateTime.Now;
         InitializeComponent();
-
+        
+        this.DataContext = new NewQuoteViewModel();  // Set DataContext here
         this.Loaded += NewQuote_Loaded;
+        
+        var end = DateTime.Now;
+        Console.WriteLine($"NewQuote_Loaded took {(end - start).TotalMilliseconds} ms");
     }
     
     private void NewQuote_Loaded(object? sender, RoutedEventArgs e)
     {
-        (this.DataContext as NewQuoteViewModel)?.RefreshItems();
-        
         ItemsDataGrid?.InvalidateMeasure();
         ItemsDataGrid?.InvalidateVisual();
     }

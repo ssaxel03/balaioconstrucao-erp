@@ -80,18 +80,6 @@ public partial class NewQuoteViewModel : ViewModelBase
             }
         }
 
-        public void RefreshItems()
-        {
-            List<Item> sortedItems = Items.ToList();
-            sortedItems.Sort(new HierarchicalIdComparer());
-            
-            Items.Clear();
-            foreach (var item in sortedItems)
-            {
-                Items.Add(item);
-            }
-        }
-
         public void GenerateQuotePdf()
         {
             

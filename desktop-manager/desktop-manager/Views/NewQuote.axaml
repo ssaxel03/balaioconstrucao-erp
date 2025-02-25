@@ -8,7 +8,7 @@
              x:Class="desktop_manager.Views.NewQuote"
              x:DataType="vm:NewQuoteViewModel">
     
-    <ScrollViewer>
+    
         
         <Grid RowDefinitions="Auto, Auto, Auto, Auto" 
               ColumnDefinitions="*">
@@ -309,7 +309,5 @@
                     Content="Generate" 
                     Command="{Binding GenerateQuotePdf}"></Button>
         </Grid>
-        
-    </ScrollViewer>
     
 </UserControl>
