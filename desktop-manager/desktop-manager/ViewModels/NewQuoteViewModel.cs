@@ -19,10 +19,6 @@ namespace desktop_manager.ViewModels;
 
 public partial class NewQuoteViewModel : ViewModelBase
 {
-    
-        private static PdfFont font = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
-        private static PdfFont fontBold = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
-
         [ObservableProperty]
         private string _clientName;
         
@@ -118,89 +114,60 @@ public partial class NewQuoteViewModel : ViewModelBase
             
             using (FileStream stream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
             {
-                PdfWriter writer = new PdfWriter(stream);
-                PdfDocument pdf = new PdfDocument(writer);
-                Document doc = new Document(pdf);
-
-                // Add Logos (Company & Association)
-
-                // Set top margin to leave space for the header logos
-                doc.SetTopMargin(120);
-
-                // Add first page content as inline paragraphs (label in bold, value in regular)
-                AddLabelValue(doc, "Quote ID:", quoteId);
-                AddLabelValue(doc, "Date:", date);
-
-                // Add header for Company details
-                doc.Add(new Paragraph("Company ID")
-                    .SetFont(fontBold)
-                    .SetFontSize(12)
-                    .SetMarginTop(20));
-
-                AddLabelValue(doc, "Company Name:", companyName);
-                AddLabelValue(doc, "Alvará nº:", alvara);
-                AddLabelValue(doc, "NIPC:", nipc);
-                AddLabelValue(doc, "Direção Técnica:", technicalDirector);
-                AddLabelValue(doc, "Email:", companyEmail);
-                AddLabelValue(doc, "Website:", website);
-                AddLabelValue(doc, "Cellphone:", companyCellphone);
-
-                // Add header for Client details
-                doc.Add(new Paragraph("Client ID")
-                    .SetFont(fontBold)
-                    .SetFontSize(12)
-                    .SetMarginTop(20));
-
-                AddLabelValue(doc, "Client Name:", ClientName);
-                AddLabelValue(doc, "Client Address:", ClientAddress);
-
-                // Add header for Quote details
-                doc.Add(new Paragraph("Quote details")
-                    .SetFont(fontBold)
-                    .SetFontSize(12)
-                    .SetMarginTop(20));
-
-                AddLabelValue(doc, "Subject:", Subject);
-
-                string globalAmount = Items.Sum(item => item.Total).ToString("C2") + (Vat ? " + IVA" : "");
-                AddLabelValue(doc, "Global Amount:", globalAmount);
-
-                // Close the document – yer voyage is complete!
-                doc.Close();
                 
-                /*
-                PdfWriter writer = new PdfWriter(stream);
-                PdfDocument pdf = new PdfDocument(writer);
-                Document document = new Document(pdf);
-                
-                document.Add(new Paragraph("Balaio - Contrução Civil").SetFontSize(14));
-
-                Table table = new Table(5); // 5 Columns: ID, Description, Quantity, Unit Price, Total
-
-                // Add Table Header
-                table.AddHeaderCell("ID");
-                table.AddHeaderCell("Description");
-                table.AddHeaderCell("Quantity");
-                table.AddHeaderCell("Unit Price");
-                table.AddHeaderCell("Total");
-
-                // Add Table Rows
-                foreach (var item in Items)
+                using (PdfWriter writer = new PdfWriter(stream))
                 {
-                    table.AddCell(item.Id);
-                    table.AddCell(item.Description);
-                    table.AddCell(item.Quantity.ToString());
-                    table.AddCell(item.UnitPrice.ToString("C2"));
-                    table.AddCell(item.Total.ToString("C2"));
-                }
+                    using (PdfDocument pdf = new PdfDocument(writer))
+                    {
+                        Document doc = new Document(pdf);
+                        
+                        PdfFont fontBold = PdfFontFactory.CreateFont(StandardFonts.TIMES_BOLD);
+                        
+                        // Set top margin to leave space for the header logos
+                        doc.SetTopMargin(120);
 
-                document.Add(table);
-                document.Close();
-                */
-                
-                
-                
-                
+                        // Add first page content as inline paragraphs (label in bold, value in regular)
+                        AddLabelValue(doc, "Quote ID:", quoteId);
+                        AddLabelValue(doc, "Date:", date);
+
+                        // Add header for Company details
+                        doc.Add(new Paragraph("Company ID")
+                            .SetFont(fontBold)
+                            .SetFontSize(12)
+                            .SetMarginTop(20));
+
+                        AddLabelValue(doc, "Company Name:", companyName);
+                        AddLabelValue(doc, "Alvará nº:", alvara);
+                        AddLabelValue(doc, "NIPC:", nipc);
+                        AddLabelValue(doc, "Direção Técnica:", technicalDirector);
+                        AddLabelValue(doc, "Email:", companyEmail);
+                        AddLabelValue(doc, "Website:", website);
+                        AddLabelValue(doc, "Cellphone:", companyCellphone);
+
+                        // Add header for Client details
+                        doc.Add(new Paragraph("Client ID")
+                            .SetFont(fontBold)
+                            .SetFontSize(12)
+                            .SetMarginTop(20));
+
+                        AddLabelValue(doc, "Client Name:", ClientName);
+                        AddLabelValue(doc, "Client Address:", ClientAddress);
+
+                        // Add header for Quote details
+                        doc.Add(new Paragraph("Quote details")
+                            .SetFont(fontBold)
+                            .SetFontSize(12)
+                            .SetMarginTop(20));
+
+                        AddLabelValue(doc, "Subject:", Subject);
+
+                        string globalAmount = Items.Sum(item => item.Total).ToString("C2") + (Vat ? " + IVA" : "");
+                        AddLabelValue(doc, "Global Amount:", globalAmount);
+            
+                        // Flush & Close
+                        doc.Close();
+                    }
+                }
             }
             
             Console.WriteLine($"PDF generated: {filePath}");
@@ -210,6 +177,9 @@ public partial class NewQuoteViewModel : ViewModelBase
         
         private static void AddLabelValue(Document doc, string label, string value)
         {
+            PdfFont font = PdfFontFactory.CreateFont(StandardFonts.TIMES_ROMAN);
+            PdfFont fontBold = PdfFontFactory.CreateFont(StandardFonts.TIMES_BOLD);
+            
             Paragraph p = new Paragraph();
             p.Add(new Text(label).SetFont(fontBold));
             p.Add(new Text(" " + value).SetFont(font));
