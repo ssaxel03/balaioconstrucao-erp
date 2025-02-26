@@ -14,16 +14,16 @@ using iText.Layout.Properties;
 
 namespace desktop_manager.Utility;
 
-public class DocumentGenerator
+public static class DocumentGenerator
 {
     
-    private static string companyName = "Balaio - Construção Civil, Unipessoal, Lda";
-    private static string alvara = "92195";
-    private static string nipc = "514818506";
-    private static string technicalDirector = "Daniel Soares";
-    private static string companyEmail = "geral@balaioconstrucao.pt";
-    private static string website = "www.balaioconstrucao.pt";
-    private static string companyCellphone = "+351 926 332 656 (chamada para a rede móvel nacional)";
+    private const string CompanyName = "Balaio - Construção Civil, Unipessoal, Lda";
+    private const string Alvara = "92195";
+    private const string Nipc = "514818506";
+    private const string TechnicalDirector = "Daniel Soares";
+    private const string CompanyEmail = "geral@balaioconstrucao.pt";
+    private const string Website = "www.balaioconstrucao.pt";
+    private const string CompanyCellphone = "+351 926 332 656 (chamada para a rede móvel nacional)";
     
     public static void GenerateQuote(string clientName, string clientAddress, string subject, ObservableCollection<Item> items, bool vat)
     {
@@ -63,7 +63,7 @@ public class DocumentGenerator
         string quotesFolderPath = EnsureDirectory("Quotes");
         
         // DOCUMENT VALUES
-        string fileName = "Quote.pdf";
+        string fileName = clientName + " - " + subject + ".pdf";
         string filePath = Path.Combine(quotesFolderPath, fileName);
         
         // MAKING SURE FILE IS NOT OVERRIDING ANOTHER FILE
@@ -100,13 +100,13 @@ public class DocumentGenerator
                         .SetFontSize(12)
                         .SetMarginTop(20));
 
-                    AddLabelValue(doc, "Company Name:", companyName);
-                    AddLabelValue(doc, "Alvará nº:", alvara);
-                    AddLabelValue(doc, "NIPC:", nipc);
-                    AddLabelValue(doc, "Direção Técnica:", technicalDirector);
-                    AddLabelValue(doc, "Email:", companyEmail);
-                    AddLabelValue(doc, "Website:", website);
-                    AddLabelValue(doc, "Cellphone:", companyCellphone);
+                    AddLabelValue(doc, "Company Name:", CompanyName);
+                    AddLabelValue(doc, "Alvará nº:", Alvara);
+                    AddLabelValue(doc, "NIPC:", Nipc);
+                    AddLabelValue(doc, "Direção Técnica:", TechnicalDirector);
+                    AddLabelValue(doc, "Email:", CompanyEmail);
+                    AddLabelValue(doc, "Website:", Website);
+                    AddLabelValue(doc, "Cellphone:", CompanyCellphone);
 
                     // Add header for Client details
                     doc.Add(new Paragraph("Client ID")
@@ -176,11 +176,12 @@ public class DocumentGenerator
         Paragraph t = new Paragraph();
         t.Add(new Text(paragraphTitle.Index + ". " + paragraphTitle.Title).SetFont(fontBold));
         
-        Paragraph p = new Paragraph();
+        Paragraph p = new Paragraph().SetMarginLeft(12);
 
         for (int i = 0; i < paragraphTitle.Paragraphs.Count; i++)
         {
-            p.Add(new Text(paragraphTitle.Index + "." + (i + 1) + ". " + paragraphTitle.Paragraphs[i] + "\n").SetFont(font));
+            p.Add(new Text(paragraphTitle.Index + "." + (i + 1) + ". ").SetFont(fontBold));
+            p.Add(new Text(paragraphTitle.Paragraphs[i] + "\n").SetFont(font));
         }
 
         p.SetTextAlignment(TextAlignment.JUSTIFIED);
