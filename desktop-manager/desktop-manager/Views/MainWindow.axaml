@@ -10,7 +10,8 @@
         Title="desktop_manager"
         Background="#F6F6F6"
         MinHeight="480"
-        MinWidth="840">
+        MinWidth="840"
+        Focusable="True">
 
     <Grid RowDefinitions="Auto, *">
         
