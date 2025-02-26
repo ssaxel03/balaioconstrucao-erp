@@ -14,6 +14,7 @@ using iText.Kernel.Pdf;
 using iText.Kernel.Pdf.Event;
 using iText.Layout;
 using iText.Layout.Element;
+using iText.Layout.Properties;
 
 namespace desktop_manager.ViewModels;
 
@@ -44,11 +45,9 @@ public partial class NewQuoteViewModel : ViewModelBase
         [ObservableProperty]
         private bool _vat = true; // Bound to CheckBox
 
-        public int Partnership => IsCondominium ? 15 : 0; // Auto-updates
-
         partial void OnIsCondominiumChanged(bool value)
         {
-            Console.WriteLine(_isCondominium);
+            Console.WriteLine(IsCondominium);
             
             foreach (Item item in Items)
             {
@@ -79,111 +78,8 @@ public partial class NewQuoteViewModel : ViewModelBase
         public void GenerateQuotePdf()
         {
             
-            string quotesFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SimpleQuotes", "Quotes");
+            DocumentGenerator.GenerateQuote(ClientName, ClientAddress, Subject, Items, Vat);
             
-            Directory.CreateDirectory(quotesFolderPath);
-
-            string fileName = "Quote.pdf";
-            string filePath = Path.Combine(quotesFolderPath, fileName);
-            
-            // TEST VALUES START
-            
-            string quoteId = "36/2025";
-            string date = DateTime.Now.ToString("dd/MM/yyyy");
-
-            // Company details
-            string companyName = "Balaio - Construção Civil, Unipessoal, Lda";
-            string alvara = "92195";
-            string nipc = "514818506";
-            string technicalDirector = "Daniel Soares";
-            string companyEmail = "geral@balaioconstrucao.pt";
-            string website = "www.balaioconstrucao.pt";
-            string companyCellphone = "+351 926 332 656 (chamada para a rede móvel nacional)";
-            
-            // TEST VALUES END
-            
-            int fileCount = 1;
-            while (File.Exists(filePath))
-            {
-                string newFileName = $"Quote ({fileCount}).pdf";
-                filePath = Path.Combine(quotesFolderPath, newFileName);
-                fileCount++;
-            }
-            
-            
-            
-            using (FileStream stream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
-            {
-                
-                using (PdfWriter writer = new PdfWriter(stream))
-                {
-                    using (PdfDocument pdf = new PdfDocument(writer))
-                    {
-                        Document doc = new Document(pdf);
-                        
-                        PdfFont fontBold = PdfFontFactory.CreateFont(StandardFonts.TIMES_BOLD);
-                        
-                        // Set top margin to leave space for the header logos
-                        doc.SetTopMargin(120);
-
-                        // Add first page content as inline paragraphs (label in bold, value in regular)
-                        AddLabelValue(doc, "Quote ID:", quoteId);
-                        AddLabelValue(doc, "Date:", date);
-
-                        // Add header for Company details
-                        doc.Add(new Paragraph("Company ID")
-                            .SetFont(fontBold)
-                            .SetFontSize(12)
-                            .SetMarginTop(20));
-
-                        AddLabelValue(doc, "Company Name:", companyName);
-                        AddLabelValue(doc, "Alvará nº:", alvara);
-                        AddLabelValue(doc, "NIPC:", nipc);
-                        AddLabelValue(doc, "Direção Técnica:", technicalDirector);
-                        AddLabelValue(doc, "Email:", companyEmail);
-                        AddLabelValue(doc, "Website:", website);
-                        AddLabelValue(doc, "Cellphone:", companyCellphone);
-
-                        // Add header for Client details
-                        doc.Add(new Paragraph("Client ID")
-                            .SetFont(fontBold)
-                            .SetFontSize(12)
-                            .SetMarginTop(20));
-
-                        AddLabelValue(doc, "Client Name:", ClientName);
-                        AddLabelValue(doc, "Client Address:", ClientAddress);
-
-                        // Add header for Quote details
-                        doc.Add(new Paragraph("Quote details")
-                            .SetFont(fontBold)
-                            .SetFontSize(12)
-                            .SetMarginTop(20));
-
-                        AddLabelValue(doc, "Subject:", Subject);
-
-                        string globalAmount = Items.Sum(item => item.Total).ToString("C2") + (Vat ? " + IVA" : "");
-                        AddLabelValue(doc, "Global Amount:", globalAmount);
-            
-                        // Flush & Close
-                        doc.Close();
-                    }
-                }
-            }
-            
-            Console.WriteLine($"PDF generated: {filePath}");
-            
-            Process.Start(new ProcessStartInfo(filePath) { UseShellExecute = true });
-        }
-        
-        private static void AddLabelValue(Document doc, string label, string value)
-        {
-            PdfFont font = PdfFontFactory.CreateFont(StandardFonts.TIMES_ROMAN);
-            PdfFont fontBold = PdfFontFactory.CreateFont(StandardFonts.TIMES_BOLD);
-            
-            Paragraph p = new Paragraph();
-            p.Add(new Text(label).SetFont(fontBold));
-            p.Add(new Text(" " + value).SetFont(font));
-            doc.Add(p);
         }
     
 }
