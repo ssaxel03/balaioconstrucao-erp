@@ -14,8 +14,8 @@
               ColumnDefinitions="*">
             
             <Grid Grid.Row="0" 
-                  RowDefinitions="Auto, *, *" 
-                  ColumnDefinitions="*, *, *, *"
+                  RowDefinitions="Auto, Auto, Auto, Auto, Auto" 
+                  ColumnDefinitions="2*, 2*, *, *, *"
                   Margin="0, 0, 0, 5">
                 
                 <Grid.Styles>
@@ -23,6 +23,10 @@
                     <Style Selector="Label">
                         <Setter Property="FontSize" Value="14"></Setter>
                         <Setter Property="Foreground" Value="#181818"></Setter>
+                    </Style>
+                    
+                    <Style Selector="Label /template/ ContentPresenter">
+                        <Setter Property="TextWrapping" Value="Wrap"></Setter>
                     </Style>
                     <!-- CHECKBOX STYLES -->
                     <Style Selector="CheckBox:unchecked /template/ Border#NormalRectangle">
@@ -78,30 +82,27 @@
                        Margin="0, 0, 0, 5">
                     Client
                 </Label>
-            
-                <Grid RowDefinitions="Auto, Auto" 
-                      Grid.Row="1" 
-                      Grid.Column="0"
-                      Margin="0, 0, 0, 2">
-                    <Label Foreground="#181818" 
-                           Grid.Row="0"
-                           Margin="0, 0, 0, 1">
+                
+                <Label Grid.Row="1" Grid.Column="0" 
+                       Foreground="#181818" 
+                       Margin="0, 0, 0, 1">
                         Name
-                    </Label>
-                    <TextBox Grid.Row="1" Text="{Binding ClientName}"/>
-                </Grid>
+                </Label>
+                
+                <TextBox Grid.Row="2" Grid.Column="0" 
+                         Text="{Binding ClientName}"
+                         Margin="0, 0, 0, 2"/>
             
-                <Grid RowDefinitions="Auto, Auto" 
-                      Grid.Row="2" 
-                      Grid.Column="0"
-                      Margin="0, 0, 0, 2">
-                    <Label Foreground="#181818" 
-                           Grid.Row="0"
-                           Margin="0, 0, 0, 1">
+                
+                <Label Grid.Row="3" Grid.Column="0" 
+                       Foreground="#181818" 
+                       Margin="0, 0, 0, 1">
                         Address
-                    </Label>
-                    <TextBox Grid.Row="1" Text="{Binding ClientAddress}"/>
-                </Grid>
+                </Label>
+                <TextBox Grid.Row="4" Grid.Column="0"
+                         Text="{Binding ClientAddress}"
+                         Margin="0, 0, 0, 2"/>
+                
             
                 <Label Grid.Row="0" 
                        Grid.Column="1"
@@ -109,29 +110,59 @@
                        Margin="5, 0, 0, 5">
                     Document
                 </Label>
-            
-                <Grid RowDefinitions="Auto, Auto" 
-                      Grid.Row="1" 
-                      Grid.Column="1"
-                      Margin="5, 0, 0, 2">
-                    <Label Foreground="#181818" 
-                           Grid.Row="0"
-                           Margin="0, 0, 0, 1">
+                
+                <Label Grid.Row="1" Grid.Column="1" 
+                       Foreground="#181818"
+                       Margin="5, 0, 0, 1">
                         Subject
-                    </Label>
-                    <TextBox Grid.Row="1" Text="{Binding Subject}"/>
-                </Grid>
-            
-                <StackPanel VerticalAlignment="Bottom"
+                </Label>
+                <TextBox Grid.Row="2" Grid.Column="1" 
+                         Text="{Binding Subject}"
+                         Margin="5, 0, 0, 2"/>
+                
+                <Label Grid.Row="1" Grid.Column="2" 
+                       Foreground="#181818"
+                       Margin="5, 0, 0, 1">
+                    Serial #
+                </Label>
+                <TextBox Grid.Row="2" Grid.Column="2" 
+                         Text=""
+                         Margin="5, 0, 0, 2"/>
+                
+                <Label Grid.Row="1" Grid.Column="3" 
+                       Foreground="#181818"
+                       Margin="5, 0, 0, 1">
+                    Profit %
+                </Label>
+                <TextBox Grid.Row="2" Grid.Column="3" 
+                         Text=""
+                         Margin="5, 0, 0, 2"/>
+                
+                <Label Grid.Row="1" Grid.Column="4" 
+                       Foreground="#181818"
+                       Margin="5, 0, 0, 1">
+                    Upfront %
+                </Label>
+                <TextBox Grid.Row="2" Grid.Column="4" 
+                         Text=""
+                         Margin="5, 0, 0, 2"/>
+                
+                <Label Grid.Row="3" Grid.Column="1" 
+                       Foreground="#181818"
+                       Margin="5, 0, 0, 1">
+                    Options
+                </Label>
+                <StackPanel VerticalAlignment="Center"
                             Spacing="5" 
-                            Grid.Row="2" 
+                            Grid.Row="4"
                             Grid.Column="1" 
-                            Grid.ColumnSpan="3"
+                            Grid.ColumnSpan="4"
                             Orientation="Horizontal"
                             Margin="5, 0, 0, 0">
-                    <CheckBox>Options</CheckBox>
-                    <CheckBox>Autos</CheckBox>
+                    <CheckBox IsChecked="True">Global value</CheckBox>
+                    <CheckBox IsChecked="True">Detailed values</CheckBox>
                     <CheckBox IsChecked="{Binding IsCondominium}">Condominium</CheckBox>
+                    <CheckBox>Autos</CheckBox>
                     <CheckBox IsChecked="{Binding Vat}">VAT</CheckBox>
                 </StackPanel>
             
