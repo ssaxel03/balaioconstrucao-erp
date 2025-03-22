@@ -10,8 +10,6 @@
     	<RuntimeIdentifiers>linux-x64;win-x64</RuntimeIdentifiers>
     	<PublishSingleFile>true</PublishSingleFile>
     	<SelfContained>true</SelfContained>
-    	<!-- Trimming for smaller size -->
-    	<PublishTrimmed>true</PublishTrimmed>
     </PropertyGroup>
 
     <ItemGroup>
