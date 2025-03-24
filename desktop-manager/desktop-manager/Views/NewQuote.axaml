@@ -171,6 +171,7 @@
             <DataGrid Grid.Row="1" 
                       x:Name="ItemsDataGrid"
                       ItemsSource="{Binding Items}" 
+                      SelectedItem="{Binding SelectedItem}"
                       AutoGenerateColumns="False" 
                       CanUserSortColumns="False"
                       ColumnWidth="2*"
@@ -344,10 +345,19 @@
                 
             </DataGrid>
             
-            <Button Grid.Row="2" 
-                    Background="Red" 
-                    Content="Generate" 
-                    Command="{Binding GenerateQuotePdf}"></Button>
+            <StackPanel Grid.Row="2" 
+                        Orientation="Horizontal" 
+                        HorizontalAlignment="Center" 
+                        Spacing="10"
+                        Margin="0,0,0,5">
+                <Button Background="Red" 
+                        Content="Delete Selected Item" 
+                        Command="{Binding DeleteSelectedItemCommand}"/>
+            
+                <Button Background="Red" 
+                        Content="Generate" 
+                        Command="{Binding GenerateQuotePdf}"/>
+            </StackPanel>
         </Grid>
     
 </UserControl>

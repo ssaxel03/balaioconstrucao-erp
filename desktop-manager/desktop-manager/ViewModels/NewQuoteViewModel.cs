@@ -1,20 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
+using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using desktop_manager.Models;
-using System.IO;
 using desktop_manager.Utility;
-using desktop_manager.ViewModels;
-using iText.IO.Font.Constants;
-using iText.Kernel.Font;
-using iText.Kernel.Pdf;
-using iText.Kernel.Pdf.Event;
-using iText.Layout;
-using iText.Layout.Element;
-using iText.Layout.Properties;
 
 namespace desktop_manager.ViewModels;
 
@@ -40,6 +32,9 @@ public partial class NewQuoteViewModel : ViewModelBase
         };
         
         [ObservableProperty]
+        private Item _selectedItem;
+        
+        [ObservableProperty]
         private bool _isCondominium = true; // Bound to CheckBox
         
         [ObservableProperty]
@@ -55,11 +50,17 @@ public partial class NewQuoteViewModel : ViewModelBase
             }
         }
         
-        public void AddRow()
+        [RelayCommand]
+        private void DeleteSelectedItem()
         {
-            Items.Add(new Item("0.0", "Placeholder", 0.00m, 0.00m));
+            if (SelectedItem != null)
+            {
+                Items.Remove(SelectedItem);
+            
+                // Re-sort and re-index items after deletion
+                SortItems();
+            }
         }
-        
         
         public void SortItems()
         {
@@ -77,9 +78,7 @@ public partial class NewQuoteViewModel : ViewModelBase
 
         public void GenerateQuotePdf()
         {
-            
             DocumentGenerator.GenerateQuote(ClientName, ClientAddress, Subject, Items, Vat);
-            
         }
     
 }
