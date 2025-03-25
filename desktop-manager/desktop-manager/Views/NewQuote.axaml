@@ -345,11 +345,10 @@
                 
             </DataGrid>
             
-            <StackPanel Grid.Row="2" 
-                        Orientation="Horizontal" 
-                        HorizontalAlignment="Center" 
-                        Spacing="10"
-                        Margin="0,0,0,5">
+            <Grid Grid.Row="2" 
+                        HorizontalAlignment="Left"
+                        Margin="0,0,0,5"
+                        ColumnDefinitions="*, *, 5*">
                 <Button Background="Red" 
                         Content="Delete Selected Item" 
                         Command="{Binding DeleteSelectedItemCommand}"/>
@@ -357,7 +356,7 @@
                 <Button Background="Red" 
                         Content="Generate" 
                         Command="{Binding GenerateQuotePdf}"/>
-            </StackPanel>
+            </Grid>
         </Grid>
     
 </UserControl>

@@ -6,10 +6,11 @@
         <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
         <ApplicationManifest>app.manifest</ApplicationManifest>
 	<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
-	<!-- Linux build settings -->
     	<RuntimeIdentifiers>linux-x64;win-x64</RuntimeIdentifiers>
     	<PublishSingleFile>true</PublishSingleFile>
-    	<SelfContained>true</SelfContained>
+	<SelfContained>true</SelfContained>
+	<PublishReadyToRun>true</PublishReadyToRun>
+	<PublishAot>true</PublishAot>
     </PropertyGroup>
 
     <ItemGroup>

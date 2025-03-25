@@ -56,7 +56,9 @@ namespace desktop_manager.Views
         
         public void NewQuoteButton_Click(object? sender, RoutedEventArgs e)
         {
+            Console.WriteLine("ASSIGNING TO CONTENT");
             this._contentControl.Content = _newQuoteWindow;
+            Console.WriteLine("ASSIGNED TO CONTENT");
         }
     }
 }
