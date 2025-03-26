@@ -5,12 +5,11 @@
         <Nullable>enable</Nullable>
         <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
         <ApplicationManifest>app.manifest</ApplicationManifest>
-	<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
     	<RuntimeIdentifiers>linux-x64;win-x64</RuntimeIdentifiers>
     	<PublishSingleFile>true</PublishSingleFile>
-	<SelfContained>true</SelfContained>
-	<PublishReadyToRun>true</PublishReadyToRun>
-	<PublishAot>true</PublishAot>
+		<SelfContained>true</SelfContained>
+		<PublishAot>true</PublishAot>
     </PropertyGroup>
 
     <ItemGroup>
