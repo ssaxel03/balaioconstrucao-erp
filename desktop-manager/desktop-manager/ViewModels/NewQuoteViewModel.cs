@@ -50,6 +50,19 @@ public partial class NewQuoteViewModel : ViewModelBase
         }
         
         [RelayCommand]
+        public void AddNewRow()
+        {
+            // Generate a new unique ID for the new item.
+            string newId = "";
+
+            // Create a new Item with default values.
+            var newItem = new Item(newId, "New Item", 1, 0);
+
+            // Add the new item to the Items collection.
+            Items.Add(newItem);
+        }
+        
+        [RelayCommand]
         private void DeleteSelectedItem()
         {
             if (SelectedItem != null)

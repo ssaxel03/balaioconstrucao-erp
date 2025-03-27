@@ -357,6 +357,10 @@
                 <Button Background="Red" 
                         Content="Generate" 
                         Command="{Binding GenerateQuotePdf}"/>
+                
+                <Button Background="Green"
+                        Content="Add Row"
+                        Command="{Binding AddNewRowCommand}"/>
             </StackPanel>
         </Grid>
     
