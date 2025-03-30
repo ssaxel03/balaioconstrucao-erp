@@ -99,7 +99,7 @@ public partial class NewQuoteViewModel : ViewModelBase
 
         public void GenerateQuotePdf()
         {
-            DocumentGenerator.GenerateQuote(ClientName, ClientAddress, Subject, Items, Vat);
+            DocumentGenerator.GenerateQuote(ClientName, ClientAddress, Subject, Items, HasVat);
         }
     
 }
