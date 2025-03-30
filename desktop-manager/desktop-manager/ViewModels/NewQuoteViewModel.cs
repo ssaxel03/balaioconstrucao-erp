@@ -34,10 +34,19 @@ public partial class NewQuoteViewModel : ViewModelBase
         private Item _selectedItem;
         
         [ObservableProperty]
+        private bool _hasGlobalValue = true; // Bound to CheckBox
+        
+        [ObservableProperty]
+        private bool _hasDetailedValues = true; // Bound to CheckBox
+        
+        [ObservableProperty]
         private bool _isCondominium = true; // Bound to CheckBox
         
         [ObservableProperty]
-        private bool _vat = true; // Bound to CheckBox
+        private bool _hasAutos = true; // Bound to CheckBox
+        
+        [ObservableProperty]
+        private bool _hasVat = true; // Bound to CheckBox
 
         partial void OnIsCondominiumChanged(bool value)
         {

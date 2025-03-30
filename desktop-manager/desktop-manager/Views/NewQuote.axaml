@@ -159,11 +159,11 @@
                             Grid.ColumnSpan="4"
                             Orientation="Horizontal"
                             Margin="5, 0, 0, 0">
-                    <CheckBox IsChecked="True">Global value</CheckBox>
-                    <CheckBox IsChecked="True">Detailed values</CheckBox>
+                    <CheckBox IsChecked="{Binding HasGlobalValue}">Global value</CheckBox>
+                    <CheckBox IsChecked="{Binding HasDetailedValues}">Detailed values</CheckBox>
                     <CheckBox IsChecked="{Binding IsCondominium}">Condominium</CheckBox>
-                    <CheckBox>Autos</CheckBox>
-                    <CheckBox IsChecked="{Binding Vat}">VAT</CheckBox>
+                    <CheckBox IsChecked="{Binding HasAutos}">Autos</CheckBox>
+                    <CheckBox IsChecked="{Binding HasVat}">VAT</CheckBox>
                 </StackPanel>
             
             </Grid>
