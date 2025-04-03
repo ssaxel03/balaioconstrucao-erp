@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using desktop_manager.Models;
@@ -25,7 +26,7 @@ public static class DocumentGenerator
     private const string Website = "www.balaioconstrucao.pt";
     private const string CompanyCellphone = "+351 926 332 656 (chamada para a rede móvel nacional)";
     
-    public static void GenerateQuote(string clientName, string clientAddress, string subject, ObservableCollection<Item> items, bool vat)
+    public static void GenerateQuote(string clientName, string clientAddress, string subject, ObservableCollection<Item> items, bool hasGlobalValue, bool hasDetailedValues, bool hasAutos, bool vat)
     {
         List<ParagraphTitle> paragraphTitles = new List<ParagraphTitle>()
         {
@@ -125,7 +126,7 @@ public static class DocumentGenerator
 
                     AddLabelValue(doc, "Subject:", subject);
 
-                    string globalAmount = items.Sum(item => item.Total).ToString("C2") + (vat ? " + IVA" : "");
+                    string globalAmount = items.Sum(item => item.Total).ToString("C2", new CultureInfo("pt-PT")) + (vat ? " + IVA" : "");
                     AddLabelValue(doc, "Global Amount:", globalAmount);
                         
                     doc.Add(new AreaBreak(AreaBreakType.NEXT_PAGE));
@@ -134,7 +135,6 @@ public static class DocumentGenerator
                     {
                         AddParagraphTitle(doc, paragraphTitle);
                     }
-
             
                     // Flush & Close
                     doc.Close();
