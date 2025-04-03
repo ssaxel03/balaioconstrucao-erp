@@ -28,10 +28,15 @@ public static class DocumentGenerator
     
     public static void GenerateQuote(string clientName, string clientAddress, string subject, ObservableCollection<Item> items, bool hasGlobalValue, bool hasDetailedValues, bool hasAutos, bool vat)
     {
+        // Create payment conditions based on hasAutos flag
+        string paymentConditionAutosFalse = "Na adjudicação será faturado 50% do valor global da obra. O restante valor será faturado na conclusão da obra. Estas condições poderão ser alteradas de forma a uma melhor adequação às necessidades de ambas as partes (a combinar).";
+        string paymentConditionAutosTrue = "Na adjudicação será faturado 50% do valor global da obra. O restante valor deverá ser pago de acordo com autos de medição realizados no dia 25 de cada mês. Estas condições poderão ser alteradas de forma a uma melhor adequação às necessidades de ambas as partes (a combinar).";
+        
         List<ParagraphTitle> paragraphTitles = new List<ParagraphTitle>()
         {
             new ParagraphTitle(1, "Prazo de execução da obra", ["A combinar."]),
-            new ParagraphTitle(2, "Condições de pagamento da obra", ["Na adjudicação será faturado 50% do valor global da obra. O restante valor será faturado na conclusão da obra. Estas condições poderão ser alteradas de forma a uma melhor adequação às necessidades de ambas as partes (a combinar).", 
+            new ParagraphTitle(2, "Condições de pagamento da obra", [
+                hasAutos ? paymentConditionAutosTrue : paymentConditionAutosFalse, 
                 "O incumprimento do referido prazo de pagamento a que o Cliente fica obrigado implicará, por um lado a suspensão dos trabalhos até a regularização do pagamento em falta e, por outro, dará também origem ao pagamento de juros de mora sobre o montante em divida calculados à taxa legal em vigor.", 
                 "Sobre o preço global da empreitada incide o IVA à taxa legal em vigor."]),
             new ParagraphTitle(3, "Garantias da obra", ["Os trabalhos executados estão garantidos em conformidade com o disposto na lei em vigor."]),
@@ -126,7 +131,11 @@ public static class DocumentGenerator
 
                     AddLabelValue(doc, "Subject:", subject);
 
-                    string globalAmount = items.Sum(item => item.Total).ToString("C2", new CultureInfo("pt-PT")) + (vat ? " + IVA" : "");
+                    // Set global amount based on hasGlobalValue flag
+                    string globalAmount = hasGlobalValue 
+                        ? items.Sum(item => item.Total).ToString("C2", new CultureInfo("pt-PT")) + (vat ? " + IVA" : "")
+                        : "N/A";
+                        
                     AddLabelValue(doc, "Global Amount:", globalAmount);
                         
                     doc.Add(new AreaBreak(AreaBreakType.NEXT_PAGE));
@@ -213,5 +222,4 @@ public static class DocumentGenerator
             this.Paragraphs = paragraphs.ToList();
         }
     }
-    
 }
