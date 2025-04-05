@@ -6,7 +6,8 @@
              xmlns:utility="clr-namespace:desktop_manager.Utility"
              mc:Ignorable="d"
              x:Class="desktop_manager.Views.NewQuote"
-             x:DataType="vm:NewQuoteViewModel">
+             x:DataType="vm:NewQuoteViewModel"
+             >
     
     
         

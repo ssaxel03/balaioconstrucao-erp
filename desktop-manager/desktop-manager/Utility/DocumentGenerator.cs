@@ -269,7 +269,6 @@ namespace desktop_manager.Utility
         private static string GenerateUniquePdfFilePath(string folderPath, string clientName, string subject)
         {
             // CREATE A BASE FILENAME (SANITIZE POTENTIAL INVALID CHARS)
-            // TODO IMPLEMENT MORE ROBUST FILENAME SANITIZATION IF NEEDED
             string baseFileName = $"{clientName} - {subject}.pdf";
             string sanitizedBaseFileName = SanitizeFileName(baseFileName); // BASIC SANITIZATION
             string filePath = Path.Combine(folderPath, sanitizedBaseFileName);
