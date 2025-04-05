@@ -107,11 +107,11 @@ namespace desktop_manager.Utility
             using (FileStream stream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
             using (PdfWriter writer = new PdfWriter(stream))
             using (PdfDocument pdf = new PdfDocument(writer))
-            using (Document doc = new Document(pdf)) // USING DOCUMENT INSTEAD OF PDFDOCUMENT FOR EASIER CONTENT ADDITION
+            using (Document doc = new Document(pdf))
             {
                 // SET DOCUMENT MARGINS (EXAMPLE USING 1 INCH = 72 POINTS, EXCEPT TOP)
                 // ADJUST AS NEEDED
-                doc.SetMargins(111f, 72f, 72f, 72f); // TOP WAS 111 IN ORIGINAL
+                doc.SetMargins(111f, 36f, 36f, 36f);
 
                 // ADD THE HEADER EVENT HANDLER FOR LOGOS
                 // ALLOWS CONTINUATION EVEN IF LOGOS ARE MISSING
@@ -153,13 +153,11 @@ namespace desktop_manager.Utility
             }
             catch (FileNotFoundException)
             {
-                // LOGGING REMOVED AS PER REQUEST
-                // PDF WILL BE GENERATED WITHOUT HEADERS IF LOGOS ARE MISSING
+                doc.SetTopMargin(36f);
             }
             catch (Exception)
             {
-                // CATCH OTHER POTENTIAL ERRORS DURING HANDLER SETUP
-                // LOGGING REMOVED AS PER REQUEST
+                doc.SetTopMargin(36f);
             }
         }
 
