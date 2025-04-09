@@ -205,9 +205,9 @@ namespace desktop_manager.Utility
             AddLabelValue(doc, "Subject:", subject);
 
             // CALCULATE AND FORMAT THE GLOBAL AMOUNT STRING
-            string globalAmountString = "N/A"; // DEFAULT IF NOT SHOWING GLOBAL VALUE
             if (hasGlobalValue && items != null) // CHECK ITEMS IS NOT NULL
             {
+                string globalAmountString;
                 // SUM TOTALS FROM THE ITEMS COLLECTION
                 decimal total = items.Sum(item => item.Total); // ASSUMES ITEM.TOTAL IS DECIMAL
                 // FORMAT AS CURRENCY FOR PORTUGAL LOCALE
@@ -217,10 +217,9 @@ namespace desktop_manager.Utility
                 {
                     globalAmountString += " + IVA";
                 }
+                // ADD THE CALCULATED GLOBAL AMOUNT LABEL/VALUE
+                AddLabelValue(doc, "Global Amount:", globalAmountString);
             }
-
-            // ADD THE CALCULATED GLOBAL AMOUNT LABEL/VALUE
-            AddLabelValue(doc, "Global Amount:", globalAmountString);
         }
 
         // ADDS THE NUMBERED TERMS AND CONDITIONS SECTION
