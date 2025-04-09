@@ -245,7 +245,7 @@ namespace desktop_manager.Utility
             // CREATE PARAGRAPH, SET FONT, SIZE, AND TOP MARGIN
             return new Paragraph(title)
                 .SetFont(font)
-                .SetFontSize(12)
+                .SetFontSize(11)
                 .SetMarginTop(20); // ADD SPACE BEFORE THE SECTION TITLE
         }
 
@@ -310,9 +310,9 @@ namespace desktop_manager.Utility
             // CREATE A NEW PARAGRAPH
             Paragraph p = new Paragraph();
             // ADD THE LABEL TEXT WITH BOLD FONT
-            p.Add(new Text(label).SetFont(boldFont));
+            p.Add(new Text(label).SetFont(boldFont).SetFontSize(11));
             // ADD A SPACE AND THE VALUE TEXT WITH REGULAR FONT
-            p.Add(new Text(" " + value).SetFont(regularFont));
+            p.Add(new Text(" " + value).SetFont(regularFont).SetFontSize(11));
             // ADD THE COMPLETED PARAGRAPH TO THE DOCUMENT
             doc.Add(p);
         }
